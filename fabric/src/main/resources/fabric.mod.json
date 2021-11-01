@@ -1,29 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "stardust",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Stardust",
+  "description": "Data driven ores.",
   "authors": [
-    "Me!"
+    "starmun"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-  "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "license": "CC0 1.0 Universal",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "xyz.starmun.stardust.fabric.StardustFabric"
     ]
   },
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": ">=1.16.4",
-    "architectury": ">=1.1.55"
+    "minecraft": ">=1.16.4"
   },
   "suggests": {
     "flamingo": "*"
