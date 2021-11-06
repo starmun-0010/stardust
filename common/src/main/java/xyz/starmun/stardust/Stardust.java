@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.starmun.stardust.data.Properties;
 import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
+import xyz.starmun.stardust.platform.contracts.ItemRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.PathExpectPlatform;
 import xyz.starmun.stardust.data.CustomOre;
 
@@ -29,7 +30,7 @@ public class Stardust {
         } catch (IOException e) {
             LOGGER.error("Ore stream failed.", e);
         }
-    }
+                                                                                                                                                                                                   }
     public static void addOre(Path path){
         File file = path.toFile();
         try {
@@ -45,12 +46,10 @@ public class Stardust {
     private static void parseOre(Reader reader, String name) {
         Gson gson = new Gson();
         try {
-            CustomOre ore = gson.fromJson(reader, CustomOre.class);
-           BlockRegistryExpectPlatform.Register(new Properties(ore.getName()));
-            LOGGER.info(ore.getName());
+            CustomOre ore = gson.fromJson(reader, CustomOre.class);;
+            ItemRegistryExpectPlatform.Register(name, BlockRegistryExpectPlatform.Register(new Properties(ore.getName())));
         } catch (JsonSyntaxException e) {
-            String exception = String.format("Error occurred parsing the ore: %s, invalid JSON.", name);
-            throw new JsonSyntaxException(exception);
+            LOGGER.error(String.format("Error occurred parsing the ore: %s, invalid JSON.", name));
         }
     }
 }
