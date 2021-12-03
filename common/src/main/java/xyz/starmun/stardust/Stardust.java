@@ -25,7 +25,8 @@ public class Stardust {
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     public static void init() {
         LOGGER.info("Loading Custom Ores...");
-        try (Stream<Path> stream = Files.walk(PathExpectPlatform.getConfigPath())) {
+
+        try (Stream<Path> stream = Files.walk(PathExpectPlatform.getOresConfigPath())) {
             stream.filter(f -> f.getFileName().toString().endsWith(JSON)).forEach(Stardust::addOre);
         } catch (IOException e) {
             LOGGER.error("Ore stream failed.", e);
@@ -46,7 +47,7 @@ public class Stardust {
     private static void parseOre(Reader reader, String name) {
         Gson gson = new Gson();
         try {
-            CustomOre ore = gson.fromJson(reader, CustomOre.class);;
+            CustomOre ore = gson.fromJson(reader, CustomOre.class);
             ItemRegistryExpectPlatform.Register(name, BlockRegistryExpectPlatform.Register(new Properties(ore.getName())));
         } catch (JsonSyntaxException e) {
             LOGGER.error(String.format("Error occurred parsing the ore: %s, invalid JSON.", name));
