@@ -1,10 +1,8 @@
 package xyz.starmun.stardust.platform.contracts;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import org.apache.commons.lang3.NotImplementedException;
 
-import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Path;
 
 public class PathExpectPlatform {
     @ExpectPlatform
