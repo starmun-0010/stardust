@@ -1,5 +1,6 @@
 package xyz.starmun.stardust.fabric;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import xyz.starmun.stardust.Stardust;
 import net.fabricmc.api.ModInitializer;
 

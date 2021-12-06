@@ -7,7 +7,7 @@ import xyz.starmun.stardust.data.Properties;
 import static xyz.starmun.stardust.forge.StardustForge.BLOCKS;
 
 public class BlockRegistryExpectPlatformImpl {
-    public static Block Register(Properties properties){
+    public static Block register(Properties properties){
         Block block = new Block(Block.Properties.of(Material.STONE).requiresCorrectToolForDrops());
         BLOCKS.register(properties.name, () -> block);
         return block;

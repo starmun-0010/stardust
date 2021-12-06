@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 import xyz.starmun.stardust.Stardust;
 
 public class ItemRegistryExpectPlatformImpl {
-    public static void Register(String name, Block block) {
+    public static void register(String name, Block block) {
         Registry.register(Registry.ITEM, new ResourceLocation(Stardust.MOD_ID, name), new BlockItem(block, new FabricItemSettings().group(CreativeModeTab.TAB_MISC)));
     }
 }

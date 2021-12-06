@@ -9,7 +9,7 @@ import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.data.Properties;
 
 public class BlockRegistryExpectPlatformImpl {
-    public static Block Register(Properties properties) {
+    public static Block register(Properties properties) {
         Block block = new Block(FabricBlockSettings.of(Material.METAL).strength(4.0f));
         Registry.register(Registry.BLOCK, new ResourceLocation(Stardust.MOD_ID, properties.name), block);
         return block;

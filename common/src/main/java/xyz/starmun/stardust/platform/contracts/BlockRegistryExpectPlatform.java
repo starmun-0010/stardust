@@ -6,7 +6,8 @@ import xyz.starmun.stardust.data.Properties;
 
 public class BlockRegistryExpectPlatform {
     @ExpectPlatform
-    public static Block Register(Properties properties){
+    public static Block
+    register(Properties properties){
         throw new AssertionError();
     }
 }

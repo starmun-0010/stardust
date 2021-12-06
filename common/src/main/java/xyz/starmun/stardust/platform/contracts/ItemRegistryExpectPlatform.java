@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.Block;
 
 public class ItemRegistryExpectPlatform {
     @ExpectPlatform
-    public static void Register(String name, Block block){
+    public static void register(String name, Block block){
         throw new AssertionError();
     }
 }
