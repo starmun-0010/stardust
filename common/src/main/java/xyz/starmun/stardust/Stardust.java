@@ -1,5 +1,6 @@
 package xyz.starmun.stardust;
 
+import net.minecraft.world.level.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.starmun.stardust.registry.RegistryCore;

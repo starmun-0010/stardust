@@ -3,9 +3,13 @@ package xyz.starmun.stardust.worldgen;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import xyz.starmun.stardust.Stardust;
+import xyz.starmun.stardust.data.OreBase;
 import xyz.starmun.stardust.platform.contracts.BiomeModificationExpectPlatform;
 import xyz.starmun.stardust.utils.ResourceKeyUtil;
 

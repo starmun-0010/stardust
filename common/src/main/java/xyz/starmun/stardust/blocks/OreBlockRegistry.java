@@ -3,7 +3,7 @@ package xyz.starmun.stardust.blocks;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.world.level.block.Block;
-import xyz.starmun.stardust.data.CustomOre;
+import xyz.starmun.stardust.data.OreConfigurationModel;
 import xyz.starmun.stardust.data.Properties;
 import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ItemRegistryExpectPlatform;
@@ -48,7 +48,7 @@ public class OreBlockRegistry {
     private static void registerOre(Reader reader, String fileName) {
         Gson gson = new Gson();
         try {
-            CustomOre ore = gson.fromJson(reader, CustomOre.class);
+            OreConfigurationModel ore = gson.fromJson(reader, OreConfigurationModel.class);
             Block block = BlockRegistryExpectPlatform.register(new Properties(ore.getName()));
             oreBlocks.add(block);
             ItemRegistryExpectPlatform.register(fileName, block);

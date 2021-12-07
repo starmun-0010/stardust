@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "stratum=minecraft_stone":{
+      "model":"stardust:block/iron_ore_stone"
+    },
+    "stratum=minecraft_gravel":{
+      "model":"stardust:block/iron_ore_gravel"
+    },
+    "stratum=minecraft_sand":{
+      "model":"stardust:block/iron_ore_sand"
+    }
+  }
+}

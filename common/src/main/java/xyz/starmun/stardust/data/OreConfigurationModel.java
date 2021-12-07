@@ -1,8 +1,8 @@
 package xyz.starmun.stardust.data;
 
-public class CustomOre {
+public class OreConfigurationModel {
     private String name;
-    public CustomOre(String name){
+    public OreConfigurationModel(String name){
         this.name = name;
     }
     public String getName() {

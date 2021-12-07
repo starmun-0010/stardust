@@ -18,7 +18,6 @@ public class BiomeModificationExpectPlatformImpl {
     }
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void biomeLoadingHandler(BiomeLoadingEvent event) {
-        Stardust.LOGGER.info("hit biome loader");
         BiomeModificationExpectPlatformImpl.configuredFeatures.forEach(feature-> event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, feature));
     }
 }
