@@ -1,6 +1,6 @@
 package xyz.starmun.stardust.data;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -8,24 +8,25 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class OreBase extends OreBlock {
     public static class StringProperty extends Property<String>{
-        protected final ImmutableList<String> values;
+        protected final ImmutableMap<String,String> values;
 
         public StringProperty(String name) {
             super(name, String.class);
-            this.values = ImmutableList.copyOf(Stones.Stones);
+            this.values = ImmutableMap.copyOf(Stones.Stones.stream().collect(Collectors.toMap(Function.identity(), Function.identity())));
         }
 
         @Override
         public Collection<String> getPossibleValues() {
-            return this.values;
+            return this.values.values();
         }
         public boolean equals(Object object) {
             if (this == object) {// 38
@@ -47,7 +48,7 @@ public class OreBase extends OreBlock {
         }
         @Override
         public Optional<String> getValue(String value) {
-            return !this.values.contains(value)? Optional.empty(): Optional.of(value);
+            return !this.values.containsKey(value)? Optional.empty(): Optional.of(this.values.get(value));
         }
         @Override
         public String getName(String comparable) {
