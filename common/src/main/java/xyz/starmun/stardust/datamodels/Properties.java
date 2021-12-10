@@ -1,4 +1,4 @@
-package xyz.starmun.stardust.data;
+package xyz.starmun.stardust.datamodels;
 
 public class Properties {
     public String name;

@@ -2,7 +2,7 @@ package xyz.starmun.stardust.platform.contracts.forge;
 
 import net.minecraftforge.fml.loading.FMLPaths;
 import xyz.starmun.stardust.Stardust;
-import xyz.starmun.stardust.data.Constants;
+import xyz.starmun.stardust.datamodels.Constants;
 
 import java.io.IOException;
 import java.nio.file.Files;

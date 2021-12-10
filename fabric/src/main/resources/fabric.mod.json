@@ -16,7 +16,8 @@
   "entrypoints": {
     "main": [
       "xyz.starmun.stardust.fabric.StardustFabric"
-    ]
+    ],
+    "client": ["xyz.starmun.stardust.fabric.StardustFabricClient"]
   },
   "depends": {
     "fabricloader": ">=0.7.4",

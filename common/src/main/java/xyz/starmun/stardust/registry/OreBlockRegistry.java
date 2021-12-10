@@ -1,10 +1,10 @@
-package xyz.starmun.stardust.blocks;
+package xyz.starmun.stardust.registry;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.world.level.block.Block;
-import xyz.starmun.stardust.data.OreConfigurationModel;
-import xyz.starmun.stardust.data.Properties;
+import xyz.starmun.stardust.datamodels.StardustOreModel;
+import xyz.starmun.stardust.datamodels.Properties;
 import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ItemRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.PathExpectPlatform;
@@ -14,19 +14,20 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
 public class OreBlockRegistry {
     private static final String JSON = ".json";
-    private static final ArrayList<Block> oreBlocks=new ArrayList<>();
-    public static ArrayList<Block> register(){
+    public static final Set<Block> REGISTERED_ORE_BLOCKS = new HashSet<>();
+    public static Set<Block> register(){
         LOGGER.info("Loading Custom Ores...");
         crawlOreFiles();
         LOGGER.info("Loaded Custom Ores!");
-        return oreBlocks;
+        return REGISTERED_ORE_BLOCKS;
     }
     private static void crawlOreFiles(){
 
@@ -48,9 +49,9 @@ public class OreBlockRegistry {
     private static void registerOre(Reader reader, String fileName) {
         Gson gson = new Gson();
         try {
-            OreConfigurationModel ore = gson.fromJson(reader, OreConfigurationModel.class);
+            StardustOreModel ore = gson.fromJson(reader, StardustOreModel.class);
             Block block = BlockRegistryExpectPlatform.register(new Properties(ore.getName()));
-            oreBlocks.add(block);
+            REGISTERED_ORE_BLOCKS.add(block);
             ItemRegistryExpectPlatform.register(fileName, block);
         } catch (JsonSyntaxException e) {
             LOGGER.error(String.format("Error occurred parsing the ore file: %s, invalid syntax.", fileName));

@@ -1,24 +1,22 @@
-package xyz.starmun.stardust.data;
+package xyz.starmun.stardust.blocks;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
+import xyz.starmun.stardust.datamodels.Stones;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class OreBase extends OreBlock {
+public class StardustOreBlock extends OreBlock {
     public static class StringProperty extends Property<String>{
         protected final ImmutableMap<String,String> values;
-
         public StringProperty(String name) {
             super(name, String.class);
             this.values = ImmutableMap.copyOf(Stones.Stones.stream().collect(Collectors.toMap(Function.identity(), Function.identity())));
@@ -59,8 +57,9 @@ public class OreBase extends OreBlock {
 
     }
     public static StringProperty STRATUM = StringProperty.create("stratum");
-    public OreBase(Properties properties) {
+    public StardustOreBlock(Properties properties) {
         super(properties);
+
         registerDefaultState(
                 this.getStateDefinition()
                         .any()
@@ -73,10 +72,8 @@ public class OreBase extends OreBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(STRATUM);
     }
-
-    @Override
-    public void stepOn(Level level, BlockPos blockPos, Entity entity) {
-        level.setBlockAndUpdate(blockPos, getStateDefinition().any().setValue(STRATUM, "minecraft_sand"));
-        super.stepOn(level, blockPos, entity);
+    public int getColor() {
+        return 0xAAAAFF;
     }
+
 }

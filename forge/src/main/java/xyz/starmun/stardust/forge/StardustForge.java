@@ -1,17 +1,18 @@
 package xyz.starmun.stardust.forge;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.starmun.stardust.Stardust;
+import xyz.starmun.stardust.blocks.colorhandlers.BlockColorHandler;
+import xyz.starmun.stardust.registry.OreBlockRegistry;
 
 @Mod(Stardust.MOD_ID)
 public class StardustForge {
@@ -27,8 +28,16 @@ public class StardustForge {
     }
 
     private void postInit(FMLClientSetupEvent event) {
-        for (RegistryObject<Block> block : BLOCKS.getEntries()) {
-            ItemBlockRenderTypes.setRenderLayer(block.get(), layer -> layer == RenderType.solid() || layer == RenderType.translucent() || layer == RenderType.cutout());
+        event.getMinecraftSupplier().get().tell(() ->
+                Minecraft.getInstance().getBlockColors()
+                .register(new BlockColorHandler(),
+                        OreBlockRegistry.REGISTERED_ORE_BLOCKS
+                                .toArray(new Block[0])));
+        for (Block block : OreBlockRegistry.REGISTERED_ORE_BLOCKS) {
+            ItemBlockRenderTypes.setRenderLayer(block,
+                    layer -> layer == RenderType.solid()
+                            || layer == RenderType.translucent()
+                            || layer == RenderType.cutout());
         }
     }
 }

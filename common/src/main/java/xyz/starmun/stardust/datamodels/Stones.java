@@ -1,4 +1,4 @@
-package xyz.starmun.stardust.data;
+package xyz.starmun.stardust.datamodels;
 
 import com.google.common.collect.ImmutableList;
 

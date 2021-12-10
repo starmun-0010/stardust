@@ -1,4 +1,4 @@
-package xyz.starmun.stardust.data;
+package xyz.starmun.stardust.datamodels;
 
 public class Constants {
     public static final String ORES_DIRECTORY = "ores";

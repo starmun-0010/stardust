@@ -2,7 +2,7 @@ package xyz.starmun.stardust.platform.contracts;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.world.level.block.Block;
-import xyz.starmun.stardust.data.Properties;
+import xyz.starmun.stardust.datamodels.Properties;
 
 public class BlockRegistryExpectPlatform {
     @ExpectPlatform

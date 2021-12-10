@@ -1,22 +1,17 @@
-package xyz.starmun.stardust.worldgen;
+package xyz.starmun.stardust.registry;
 
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import xyz.starmun.stardust.Stardust;
-import xyz.starmun.stardust.data.OreBase;
 import xyz.starmun.stardust.platform.contracts.BiomeModificationExpectPlatform;
-import xyz.starmun.stardust.utils.ResourceKeyUtil;
+import xyz.starmun.stardust.worldgen.StardustOreConfiguration;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 public class OreGenRegistry {
-    public static void register(ArrayList<Block> blocks){
+    public static void register(Set<Block> blocks){
 
         Registry<ConfiguredFeature<?, ?>> registry = BuiltinRegistries.CONFIGURED_FEATURE;
         blocks.forEach(block->{
