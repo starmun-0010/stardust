@@ -2,6 +2,7 @@ package xyz.starmun.stardust.registry;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import xyz.starmun.stardust.datamodels.StardustOreModel;
 import xyz.starmun.stardust.datamodels.Properties;
@@ -23,6 +24,7 @@ import static xyz.starmun.stardust.Stardust.LOGGER;
 public class OreBlockRegistry {
     private static final String JSON = ".json";
     public static final Set<Block> REGISTERED_ORE_BLOCKS = new HashSet<>();
+    public static final Set<Item> REGISTERED_ORE_ITEMS = new HashSet<>();
     public static Set<Block> register(){
         LOGGER.info("Loading Custom Ores...");
         crawlOreFiles();
@@ -52,7 +54,7 @@ public class OreBlockRegistry {
             StardustOreModel ore = gson.fromJson(reader, StardustOreModel.class);
             Block block = BlockRegistryExpectPlatform.register(new Properties(ore.getName()));
             REGISTERED_ORE_BLOCKS.add(block);
-            ItemRegistryExpectPlatform.register(fileName, block);
+            REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(ore.getName(), block));
         } catch (JsonSyntaxException e) {
             LOGGER.error(String.format("Error occurred parsing the ore file: %s, invalid syntax.", fileName));
         }

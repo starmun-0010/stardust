@@ -12,12 +12,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.blocks.colorhandlers.BlockColorHandler;
+import xyz.starmun.stardust.item.ItemColorHandler;
 import xyz.starmun.stardust.registry.OreBlockRegistry;
 
 @Mod(Stardust.MOD_ID)
 public class StardustForge {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Stardust.MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Stardust.MOD_ID);
+    public static final DeferredRegister<Item>  ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Stardust.MOD_ID);
 
     public StardustForge() {
 
@@ -28,11 +29,16 @@ public class StardustForge {
     }
 
     private void postInit(FMLClientSetupEvent event) {
-        event.getMinecraftSupplier().get().tell(() ->
-                Minecraft.getInstance().getBlockColors()
-                .register(new BlockColorHandler(),
-                        OreBlockRegistry.REGISTERED_ORE_BLOCKS
-                                .toArray(new Block[0])));
+        event.getMinecraftSupplier().get().tell(() -> {
+            Minecraft.getInstance().getBlockColors()
+                    .register(new BlockColorHandler(),
+                            OreBlockRegistry.REGISTERED_ORE_BLOCKS
+                                    .toArray(new Block[0]));
+            Minecraft.getInstance().getItemColors()
+                    .register( new ItemColorHandler(),
+                            OreBlockRegistry.REGISTERED_ORE_ITEMS
+                                    .toArray(new Item[0]));
+        });
         for (Block block : OreBlockRegistry.REGISTERED_ORE_BLOCKS) {
             ItemBlockRenderTypes.setRenderLayer(block,
                     layer -> layer == RenderType.solid()

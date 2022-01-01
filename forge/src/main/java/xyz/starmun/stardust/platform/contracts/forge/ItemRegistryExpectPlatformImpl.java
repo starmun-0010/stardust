@@ -8,7 +8,9 @@ import net.minecraft.world.level.block.Block;
 import static xyz.starmun.stardust.forge.StardustForge.ITEMS;
 
 public class ItemRegistryExpectPlatformImpl {
-    public static void register(String name, Block block){
-        ITEMS.register(name, () -> new BlockItem(block, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    public static Item register(String name, Block block){
+        Item item = new BlockItem(block, new Item.Properties().tab(CreativeModeTab.TAB_MISC));
+         ITEMS.register(name, () -> item);
+         return item;
     }
 }
