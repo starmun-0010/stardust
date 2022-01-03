@@ -11,7 +11,7 @@ import xyz.starmun.stardust.registry.OreBlockRegistry;
 public class StardustFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        OreBlockRegistry.REGISTERED_ORE_BLOCKS.forEach(block -> {
+        OreBlockRegistry.REGISTERED_ORE_BLOCKS.forEach((oreName, block) -> {
             ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) ->
                     new BlockColorHandler().getColor(state,view,pos,tintIndex), block);
 

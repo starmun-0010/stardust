@@ -5,7 +5,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 public class BiomeModificationExpectPlatform {
     @ExpectPlatform
-    public static void addOreFeature(ConfiguredFeature<?,?> configuredFeature){
+    public static void addOreFeature(String oreName, String stratumId, ConfiguredFeature<?,?> configuredFeature){
 
     }
 }

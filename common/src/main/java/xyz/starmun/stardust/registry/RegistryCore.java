@@ -1,13 +1,12 @@
 package xyz.starmun.stardust.registry;
 
-import net.minecraft.world.level.block.Block;
+import xyz.starmun.stardust.blocks.StardustOreBlock;
 
-import java.util.Set;
+import java.util.HashMap;
 
 public class RegistryCore {
     public static void registerAll(){
-        Set<Block> block = OreBlockRegistry.register();
-        OreGenRegistry.register(block);
-
+        HashMap<String, StardustOreBlock> blocksMap = OreBlockRegistry.register();
+        OreGenRegistry.register(blocksMap);
     }
 }

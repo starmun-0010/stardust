@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Mod.EventBusSubscriber
 public class BiomeModificationExpectPlatformImpl {
     protected static ArrayList<ConfiguredFeature<?, ?>> configuredFeatures = new ArrayList<>();
-    public static void addOreFeature(ConfiguredFeature<?,?> configuredFeature){
+    public static void addOreFeature(String oreName, String stratumId, ConfiguredFeature<?,?> configuredFeature){
         configuredFeatures.add(configuredFeature);
     }
     @SubscribeEvent(priority = EventPriority.HIGHEST)

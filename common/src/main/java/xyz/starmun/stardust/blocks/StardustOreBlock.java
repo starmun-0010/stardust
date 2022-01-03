@@ -1,14 +1,11 @@
 package xyz.starmun.stardust.blocks;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
-import xyz.starmun.stardust.datamodels.Stones;
+import xyz.starmun.stardust.datamodels.Stratum;
 
 import java.util.*;
 import java.util.function.Function;
@@ -19,7 +16,7 @@ public class StardustOreBlock extends OreBlock {
         protected final ImmutableMap<String,String> values;
         public StringProperty(String name) {
             super(name, String.class);
-            this.values = ImmutableMap.copyOf(Stones.Stones.stream().collect(Collectors.toMap(Function.identity(), Function.identity())));
+            this.values = ImmutableMap.copyOf(Stratum.STRATA.stream().map(stratum -> stratum.id).collect(Collectors.toMap(Function.identity(), Function.identity())));
         }
 
         @Override
@@ -65,15 +62,10 @@ public class StardustOreBlock extends OreBlock {
                         .any()
                         .setValue(STRATUM, "minecraft_stone")
         );
-
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(STRATUM);
     }
-    public int getColor() {
-        return 0xAAAAFF;
-    }
-
 }

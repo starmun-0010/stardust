@@ -32,14 +32,14 @@ public class StardustForge {
         event.getMinecraftSupplier().get().tell(() -> {
             Minecraft.getInstance().getBlockColors()
                     .register(new BlockColorHandler(),
-                            OreBlockRegistry.REGISTERED_ORE_BLOCKS
+                            OreBlockRegistry.REGISTERED_ORE_BLOCKS.values()
                                     .toArray(new Block[0]));
             Minecraft.getInstance().getItemColors()
                     .register( new ItemColorHandler(),
                             OreBlockRegistry.REGISTERED_ORE_ITEMS
                                     .toArray(new Item[0]));
         });
-        for (Block block : OreBlockRegistry.REGISTERED_ORE_BLOCKS) {
+        for (Block block : OreBlockRegistry.REGISTERED_ORE_BLOCKS.values()) {
             ItemBlockRenderTypes.setRenderLayer(block,
                     layer -> layer == RenderType.solid()
                             || layer == RenderType.translucent()
