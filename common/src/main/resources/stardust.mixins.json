@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "xyz.starmun.stardust.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BiomeDefaultFeaturesMixin"
+  ],
+  "minVersion": "0.8"
+}

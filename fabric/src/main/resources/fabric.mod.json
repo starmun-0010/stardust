@@ -19,6 +19,7 @@
     ],
     "client": ["xyz.starmun.stardust.fabric.StardustFabricClient"]
   },
+  "mixins": ["stardust.mixins.json"],
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",

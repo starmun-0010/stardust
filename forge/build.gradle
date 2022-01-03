@@ -3,7 +3,10 @@ plugins {
 }
 loom {
     forge {
-
+        mixinConfigs = ["stardust.mixins.json"]
+        dataGen {
+            mod "${archives_base_name}"
+        }
     }
 }
 
