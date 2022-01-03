@@ -2,7 +2,7 @@ package xyz.starmun.stardust.platform.contracts.fabric;
 
 import net.fabricmc.loader.api.FabricLoader;
 import xyz.starmun.stardust.Stardust;
-import xyz.starmun.stardust.datamodels.Constants;
+import xyz.starmun.stardust.constants.Constants;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,5 +35,10 @@ public class PathExpectPlatformImpl {
             Stardust.LOGGER.error("Error occurred trying to create config directory.");
             throw new IOException();
         }
+    }
+
+    public static Path getStardustModJarResourcesPath() {
+        //noinspection OptionalGetWithoutIsPresent
+        return FabricLoader.getInstance().getModContainer(Stardust.MOD_ID).get().getRootPath();
     }
 }

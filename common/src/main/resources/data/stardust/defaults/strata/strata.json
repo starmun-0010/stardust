@@ -1,0 +1,30 @@
+[
+  {
+    "modId": "minecraft",
+    "blockId": "stone"
+  },
+  {
+    "modId": "minecraft",
+    "blockId": "gravel"
+  },
+  {
+    "modId": "minecraft",
+    "blockId": "andesite"
+  },
+  {
+    "modId": "minecraft",
+    "blockId": "diorite"
+  },
+  {
+    "modId": "minecraft",
+    "blockId": "granite"
+  },
+  {
+    "modId": "minecraft",
+    "blockId": "sandstone"
+  },
+  {
+    "modId": "minecraft",
+    "blockId": "sand"
+  }
+]

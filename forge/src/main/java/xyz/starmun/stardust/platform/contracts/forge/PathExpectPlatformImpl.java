@@ -1,8 +1,9 @@
 package xyz.starmun.stardust.platform.contracts.forge;
 
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLPaths;
 import xyz.starmun.stardust.Stardust;
-import xyz.starmun.stardust.datamodels.Constants;
+import xyz.starmun.stardust.constants.Constants;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,5 +36,8 @@ public class PathExpectPlatformImpl {
             Stardust.LOGGER.error("Error occurred trying to create config directory.");
             throw new IOException();
         }
+    }
+    public static Path getStardustModJarResourcesPath() {
+        return ModList.get().getModFileById(Stardust.MOD_ID).getFile().getFilePath();
     }
 }

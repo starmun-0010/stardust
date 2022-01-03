@@ -18,4 +18,8 @@ public class PathExpectPlatform {
     public static Path getStonesConfigPath(){
         throw new AssertionError();
     }
+    @ExpectPlatform
+    public static Path getStardustModJarResourcesPath() {
+        throw new AssertionError();
+    }
 }
