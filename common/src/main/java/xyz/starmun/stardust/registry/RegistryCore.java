@@ -7,6 +7,6 @@ import java.util.HashMap;
 public class RegistryCore {
     public static void registerAll(){
         HashMap<String, StardustOreBlock> blocksMap = OreBlockRegistry.register();
-        OreGenRegistry.register(blocksMap);
+        OreGenFeatureRegistry.register(blocksMap);
     }
 }

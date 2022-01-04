@@ -14,7 +14,7 @@ import xyz.starmun.stardust.worldgen.StardustOreConfiguration;
 import java.util.HashMap;
 import java.util.Set;
 
-public class OreGenRegistry {
+public class OreGenFeatureRegistry {
     public static void register(HashMap<String, StardustOreBlock> blocks){
 
         Stratum.STRATA.forEach(stratum -> blocks.forEach((oreName, block)->{
