@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "xyz.starmun.stardust.forge.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "DataMixin"
+  ],
+  "minVersion": "0.8"
+}
