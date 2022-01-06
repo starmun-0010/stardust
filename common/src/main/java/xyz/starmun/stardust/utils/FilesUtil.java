@@ -34,7 +34,6 @@ public final class FilesUtil{
         return Paths.get(".").normalize().toAbsolutePath().getParent().toAbsolutePath();
     }
     public static List<Path> loadJsonFiles(Path directory){
-        //PathExpectPlatform.getOresConfigPath()
         try (Stream<Path> stream = Files.walk(directory)) {
             return stream.filter(f -> f.getFileName().toString().endsWith(JSON)).collect(Collectors.toList());
         } catch (IOException e) {
@@ -42,7 +41,7 @@ public final class FilesUtil{
         }
         return null;
     }
-    public static Pair<File,Reader> readFile(Path filePath){
+    public static Pair<File,Reader> loadFile(Path filePath){
         File file = null;
         try {
             file = filePath.toFile();

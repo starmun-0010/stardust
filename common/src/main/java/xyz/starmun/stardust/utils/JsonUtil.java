@@ -1,19 +1,43 @@
 package xyz.starmun.stardust.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
 
 import java.io.Reader;
+import java.util.Optional;
 
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
 public class JsonUtil {
+    public static final Gson GSON = new Gson();
+    public static Reader reader;
     public static <T> T parseJson(Reader reader, String fileName, Class<T> type) {
-        Gson gson = new Gson();
         try {
-           return gson.fromJson(reader,type);
+           return GSON.fromJson(reader,type);
         } catch (JsonSyntaxException e) {
-            LOGGER.error(String.format("Error occurred parsing file: %s, invalid syntax.", fileName));
+            LOGGER.error(String.format("Error occurred parsing file: %s, %s.", fileName,e.getMessage()));
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static <T> T parseJson(Reader reader, Codec<T> codec){
+        JsonUtil.reader = reader;
+        try {
+            JsonElement json = GSON.fromJson(reader, JsonElement.class);
+             Optional<Pair<T, JsonElement>> result = JsonOps.INSTANCE.withDecoder(codec)
+                    .apply(json)
+                    .result();
+             if(result.isPresent()){
+                 return result.get().getFirst();
+             }
+        } catch (JsonSyntaxException e) {
+            LOGGER.error(String.format("Error occurred parsing file: %s.",e.getMessage()));
+            e.printStackTrace();
         }
         return null;
     }

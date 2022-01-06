@@ -27,7 +27,7 @@ public class OreBlockRegistry {
         LOGGER.info("Loading Custom Ores...");
         FilesUtil.loadJsonFiles(PathExpectPlatform.getOresConfigPath())
                 .forEach((file)->{
-                    Pair<File,Reader> pair = FilesUtil.readFile(file);
+                    Pair<File,Reader> pair = FilesUtil.loadFile(file);
                     registerOre(JsonUtil.parseJson(pair.getRight(), pair.getLeft().getName(),StardustOreModel.class));
                 });
         LOGGER.info("Loaded Custom Ores!");

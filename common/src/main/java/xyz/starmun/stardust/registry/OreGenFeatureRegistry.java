@@ -17,7 +17,7 @@ import java.util.Set;
 public class OreGenFeatureRegistry {
     public static void register(HashMap<String, StardustOreBlock> blocks){
 
-        Stratum.STRATA.forEach(stratum -> blocks.forEach((oreName, block)->{
+            StrataRegistry.STRATA.forEach(stratum -> blocks.forEach((oreName, block)->{
             ConfiguredFeature<?, ?> configuredFeature = StardustOreConfiguration
                     .getConfigured(block, stratum);
                 BiomeModificationExpectPlatform.addOreFeature(oreName, stratum.id, configuredFeature);

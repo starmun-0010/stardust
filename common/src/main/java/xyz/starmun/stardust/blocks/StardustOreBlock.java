@@ -1,13 +1,15 @@
 package xyz.starmun.stardust.blocks;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
-import xyz.starmun.stardust.datamodels.Stratum;
+import xyz.starmun.stardust.registry.StrataRegistry;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -16,7 +18,7 @@ public class StardustOreBlock extends OreBlock {
         protected final ImmutableMap<String,String> values;
         public StringProperty(String name) {
             super(name, String.class);
-            this.values = ImmutableMap.copyOf(Stratum.STRATA.stream().map(stratum -> stratum.id).collect(Collectors.toMap(Function.identity(), Function.identity())));
+            this.values = ImmutableMap.copyOf(StrataRegistry.STRATA.stream().map(stratum -> stratum.id).collect(Collectors.toMap(Function.identity(), Function.identity())));
         }
 
         @Override
