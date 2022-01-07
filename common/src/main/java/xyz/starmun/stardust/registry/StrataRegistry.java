@@ -11,6 +11,7 @@ import xyz.starmun.stardust.utils.JsonUtil;
 
 import java.io.File;
 import java.io.Reader;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -21,16 +22,23 @@ public class StrataRegistry {
             .build();
 
     public static void register(){
-        Pair<File, Reader> pair = FilesUtil.loadFile(Paths.get(StardustPaths.DEFAULT_STRATA_FILE_CONFIG_PATH));
-        if(pair == null){
-            Stardust.LOGGER.error("Could not load strata configuration file.");
+       List<Path> filePaths = FilesUtil.crawlJsonFiles(Paths.get(StardustPaths.DEFAULT_STRATA_FILE_CONFIG_PATH));
+        if(filePaths == null){
+            Stardust.LOGGER.error("Failed loading strata configuration files.");
             return;
         }
-        List<Stratum> strata =  JsonUtil.parseJson(pair.getRight(), Codec.list(Stratum.CODEC));
-        if(strata==null){
-            Stardust.LOGGER.error("Error processing strata configuration file.");
-            return;
-        }
-        STRATA = ImmutableList.copyOf(strata);
+        filePaths.forEach(path -> {
+            Pair<File, Reader> pair = FilesUtil.loadFile(path);
+            if(pair == null){
+                Stardust.LOGGER.error("Could not load strata configuration file.");
+                return;
+            }
+            List<Stratum> strata =  JsonUtil.parseJson(pair.getRight(), Codec.list(Stratum.CODEC));
+            if(strata==null){
+                Stardust.LOGGER.error("Error processing strata configuration file.");
+                return;
+            }
+            STRATA = ImmutableList.copyOf(strata);
+        });
     }
 }

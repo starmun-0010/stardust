@@ -25,7 +25,7 @@ public class OreBlockRegistry {
     public static final Set<Item> REGISTERED_ORE_ITEMS = new HashSet<>();
     public static HashMap<String, StardustOreBlock> register(){
         LOGGER.info("Loading Custom Ores...");
-        FilesUtil.loadJsonFiles(PathExpectPlatform.getOresConfigPath())
+        FilesUtil.crawlJsonFiles(PathExpectPlatform.getOresConfigPath())
                 .forEach((file)->{
                     Pair<File,Reader> pair = FilesUtil.loadFile(file);
                     registerOre(JsonUtil.parseJson(pair.getRight(), pair.getLeft().getName(),StardustOreModel.class));
