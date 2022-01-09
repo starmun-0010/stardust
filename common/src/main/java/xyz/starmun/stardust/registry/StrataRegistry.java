@@ -35,7 +35,7 @@ public class StrataRegistry {
             }
             List<Stratum> strata =  JsonUtil.parseJson(pair.getRight(), Codec.list(Stratum.CODEC));
             if(strata==null){
-                Stardust.LOGGER.error("Error processing strata configuration file.");
+                Stardust.LOGGER.error("Error processing strata configuration file, failed to load strata.");
                 return;
             }
             STRATA = ImmutableList.copyOf(strata);

@@ -1,30 +1,37 @@
 [
   {
     "modId": "minecraft",
-    "blockId": "stone"
+    "blockId": "stone",
+    "baseTexture": "minecraft:block/stone"
   },
   {
     "modId": "minecraft",
-    "blockId": "gravel"
+    "blockId": "gravel",
+    "baseTexture": "minecraft:block/gravel"
   },
   {
     "modId": "minecraft",
-    "blockId": "andesite"
+    "blockId": "andesite",
+    "baseTexture": "minecraft:block/andesite"
   },
   {
     "modId": "minecraft",
-    "blockId": "diorite"
+    "blockId": "diorite",
+    "baseTexture": "minecraft:block/diorite"
   },
   {
     "modId": "minecraft",
-    "blockId": "granite"
+    "blockId": "granite",
+    "baseTexture": "minecraft:block/granite"
   },
   {
     "modId": "minecraft",
-    "blockId": "sandstone"
+    "blockId": "sandstone",
+    "baseTexture": "minecraft:block/sandstone"
   },
   {
     "modId": "minecraft",
-    "blockId": "sand"
+    "blockId": "sand",
+    "baseTexture": "minecraft:block/sand"
   }
 ]

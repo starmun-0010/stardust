@@ -2,7 +2,6 @@ package xyz.starmun.stardust.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
@@ -29,16 +28,23 @@ public class JsonUtil {
         JsonUtil.reader = reader;
         try {
             JsonElement json = GSON.fromJson(reader, JsonElement.class);
-             Optional<Pair<T, JsonElement>> result = JsonOps.INSTANCE.withDecoder(codec)
-                    .apply(json)
-                    .result();
+            Optional<Pair<T, JsonElement>> result = JsonOps
+                      .INSTANCE.withDecoder(codec)
+                      .apply(json)
+                      .mapError(JsonUtil::onError)
+                      .result();
              if(result.isPresent()){
                  return result.get().getFirst();
              }
-        } catch (JsonSyntaxException e) {
+        } catch (Exception e) {
             LOGGER.error(String.format("Error occurred parsing file: %s.",e.getMessage()));
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static String onError(String error) {
+        LOGGER.error(String.format("Error occurred parsing file: %s %s",System.lineSeparator(),error.replace(";", System.lineSeparator())));
+        return error;
     }
 }

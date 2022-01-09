@@ -52,22 +52,24 @@ public class StardustOreBlock extends OreBlock {
             return comparable;
         }
 
-
-
     }
     public static StringProperty STRATUM = StringProperty.create("stratum");
     public StardustOreBlock(Properties properties) {
         super(properties);
-
-        registerDefaultState(
+        if(StrataRegistry.STRATA.size()>1){
+            registerDefaultState(
                 this.getStateDefinition()
                         .any()
                         .setValue(STRATUM, "minecraft_stone")
-        );
+            );
+        }
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(STRATUM);
+
+        if(StrataRegistry.STRATA.size() > 1){
+            builder.add(STRATUM);
+        }
     }
 }

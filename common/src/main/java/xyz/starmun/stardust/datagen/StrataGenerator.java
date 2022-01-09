@@ -30,13 +30,13 @@ public class StrataGenerator extends DataProviderBase {
     @Override
     public void run(HashCache hashCache) {
         List<Stratum> strata = new ArrayList<Stratum>(){{
-            add(new Stratum("stone","minecraft"));
-            add(new Stratum("gravel","minecraft"));
-            add(new Stratum("andesite","minecraft"));
-            add(new Stratum("diorite","minecraft"));
-            add(new Stratum("granite","minecraft"));
-            add(new Stratum("sandstone","minecraft"));
-            add(new Stratum("sand","minecraft"));
+            add(new Stratum("stone","minecraft","minecraft:block/stone"));
+            add(new Stratum("gravel","minecraft","minecraft:block/gravel"));
+            add(new Stratum("andesite","minecraft","minecraft:block/andesite"));
+            add(new Stratum("diorite","minecraft","minecraft:block/diorite"));
+            add(new Stratum("granite","minecraft","minecraft:block/granite"));
+            add(new Stratum("sandstone","minecraft","minecraft:block/sandstone"));
+            add(new Stratum("sand","minecraft","minecraft:block/sand"));
         }};
         JsonOps.INSTANCE.withEncoder(Codec.list(Stratum.CODEC))
                 .apply(strata)
