@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
+import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.constants.StardustPaths;
 import xyz.starmun.stardust.datamodels.Stratum;
 
@@ -37,11 +38,18 @@ public class StrataGenerator extends DataProviderBase {
             add(new Stratum("granite","minecraft","minecraft:block/granite"));
             add(new Stratum("sandstone","minecraft","minecraft:block/sandstone"));
             add(new Stratum("sand","minecraft","minecraft:block/sand"));
+            add(new Stratum("netherrack","minecraft","minecraft:block/netherrack", Stratum.GenerationType.Block));
         }};
         JsonOps.INSTANCE.withEncoder(Codec.list(Stratum.CODEC))
                 .apply(strata)
+                .mapError(StrataGenerator::onError)
                 .result()
                 .ifPresent(jsonElement-> save(jsonElement,hashCache));
+    }
+
+    private static String onError(String error) {
+        Stardust.LOGGER.error(error);
+        return error;
     }
 
     @Override

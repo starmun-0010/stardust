@@ -33,5 +33,11 @@
     "modId": "minecraft",
     "blockId": "sand",
     "baseTexture": "minecraft:block/sand"
+  },
+  {
+    "modId": "minecraft",
+    "blockId": "netherrack",
+    "baseTexture": "minecraft:block/netherrack",
+    "generationType": "Block"
   }
 ]

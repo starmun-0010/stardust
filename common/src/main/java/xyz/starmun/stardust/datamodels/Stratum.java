@@ -1,13 +1,18 @@
 package xyz.starmun.stardust.datamodels;
 
+import com.google.common.base.Enums;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import xyz.starmun.stardust.Stardust;
 
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class Stratum {
 
@@ -17,21 +22,45 @@ public class Stratum {
     public final String baseTexture;
     public final Supplier<Block> block;
     public final Supplier<ResourceLocation> resourceLocation;
-
-    private static DataResult<String> ee(String o) {
-        return DataResult.success(o);
-    }
+    private GenerationType generationType;
 
     public static final Codec<Stratum> CODEC = RecordCodecBuilder.create((instance)->
         instance.group(
 
                 Codec.STRING.fieldOf("modId").forGetter((Stratum stratum)-> stratum.modId),
                 Codec.STRING.fieldOf("blockId").forGetter((Stratum stratum)-> stratum.blockId),
-                Codec.STRING.fieldOf("baseTexture").forGetter((Stratum stratum)-> stratum.baseTexture))
-                .apply(instance, (modId,blockId,baseTexture)-> new Stratum(blockId, modId, baseTexture))
-
+                Codec.STRING.fieldOf("baseTexture").forGetter((Stratum stratum)-> stratum.baseTexture),
+                Codec.STRING.flatXmap(Stratum::toGenerationType, Stratum::fromGenerationType)
+                        .optionalFieldOf("generationType")
+                        .orElse(Optional.of(GenerationType.BlockState))
+                        .forGetter((Stratum generationType) -> generationType.generationType == null? Optional.empty(): Optional.of(generationType.generationType)))
+                .apply(instance, (modId,blockId,baseTexture, generationType)->
+                        new Stratum(blockId, modId, baseTexture, generationType.orElse(GenerationType.BlockState)))
     );
 
+    private static DataResult<GenerationType> toGenerationType(String type) {
+        if(type != null && Enums.getIfPresent(GenerationType.class,type).isPresent()){
+            return DataResult.success(GenerationType.valueOf(type));
+        }
+        String error = type + " is not a valid value for strata generation type."
+                + System.lineSeparator() + "Valid values are: "
+                +  Arrays.stream(GenerationType.values())
+                .map(Enum::name).collect(Collectors.joining(", "));
+        Stardust.LOGGER.error(error);
+        return DataResult.error(error);
+    }
+
+    private static DataResult<String> fromGenerationType(GenerationType generationType) {
+        if(generationType == null){
+            return DataResult.error("");
+        }
+        return DataResult.success(generationType.name());
+    }
+
+    public Stratum(String blockId, String modId, String baseTexture, GenerationType generationType){
+        this(blockId,modId,baseTexture);
+        this.generationType = generationType;
+    }
     public Stratum(String blockId, String modId, String baseTexture){
         this.blockId = blockId;
         this.modId = modId;
@@ -39,5 +68,14 @@ public class Stratum {
         this.baseTexture = baseTexture;
         this.resourceLocation = ()-> new ResourceLocation(modId, blockId);
         this.block = () -> Registry.BLOCK.containsKey(resourceLocation.get()) ? Registry.BLOCK.get(resourceLocation.get()) : null;
+    }
+
+    public GenerationType getGenerationType() {
+        return generationType;
+    }
+
+    public enum GenerationType{
+        Block,
+        BlockState
     }
 }
