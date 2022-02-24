@@ -1,4 +1,4 @@
-package xyz.starmun.stardust.datagen;
+package xyz.starmun.stardust.data.generators;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;

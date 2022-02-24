@@ -6,7 +6,6 @@ import net.fabricmc.api.ModInitializer;
 public class StardustFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-
         Stardust.init();
     }
 

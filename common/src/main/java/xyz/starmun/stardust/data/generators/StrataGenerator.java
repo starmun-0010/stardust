@@ -1,4 +1,4 @@
-package xyz.starmun.stardust.datagen;
+package xyz.starmun.stardust.data.generators;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;

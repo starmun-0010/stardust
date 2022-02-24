@@ -10,4 +10,8 @@ public class ResourceKeyUtil {
         return ResourceKey.create(Registry.CONFIGURED_FEATURE_REGISTRY,
                 new ResourceLocation(Stardust.MOD_ID, "ore_wool_overworld"));
     }
+    public static ResourceKey<?> getConfigureBlockKey(String modId, String id){
+        return ResourceKey.create(Registry.BLOCK_REGISTRY,
+                new ResourceLocation(modId, id));
+    }
 }
