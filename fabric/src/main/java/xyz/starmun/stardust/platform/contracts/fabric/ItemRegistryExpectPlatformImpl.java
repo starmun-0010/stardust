@@ -13,4 +13,7 @@ public class ItemRegistryExpectPlatformImpl {
     public static Item register(String name, Block block) {
        return Registry.register(Registry.ITEM, new ResourceLocation(Stardust.MOD_ID, name), new BlockItem(block, new FabricItemSettings().group(CreativeModeTab.TAB_MISC)));
     }
+    public static Item register(String name) {
+       return Registry.register(Registry.ITEM, new ResourceLocation(Stardust.MOD_ID, name), new Item(new FabricItemSettings().group(CreativeModeTab.TAB_MISC)));
+    }
 }

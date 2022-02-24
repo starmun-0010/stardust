@@ -9,4 +9,8 @@ public class ItemRegistryExpectPlatform {
     public static Item register(String name, Block block){
         throw new AssertionError();
     }
+    @ExpectPlatform
+    public static Item register(String name){
+        throw new AssertionError();
+    }
 }

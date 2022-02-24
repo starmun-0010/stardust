@@ -10,7 +10,6 @@ public class PathExpectPlatform {
         throw new AssertionError();
     }
     @ExpectPlatform
-
     public static Path getOresConfigPath(){
         throw new AssertionError();
     }
@@ -22,4 +21,7 @@ public class PathExpectPlatform {
     public static Path getStardustModJarResourcesPath() {
         throw new AssertionError();
     }
+    @ExpectPlatform
+    public static Path getDynamicItemsConfigPath() { throw  new AssertionError(); }
+
 }

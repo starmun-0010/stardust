@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class StardustOreBlock extends OreBlock {
+public class StateBasedOreBlock extends OreBlock {
     public static class StringProperty extends Property<String>{
         protected final ImmutableMap<String,String> values;
         public StringProperty(String name) {
@@ -54,7 +54,7 @@ public class StardustOreBlock extends OreBlock {
 
     }
     public static StringProperty STRATUM = StringProperty.create("stratum");
-    public StardustOreBlock(Properties properties) {
+    public StateBasedOreBlock(Properties properties) {
         super(properties);
         if(StrataRegistry.STRATA.size()>1){
             registerDefaultState(

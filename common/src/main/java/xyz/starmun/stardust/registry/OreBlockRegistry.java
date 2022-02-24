@@ -1,8 +1,9 @@
 package xyz.starmun.stardust.registry;
 
+import com.ibm.icu.impl.CalendarCache;
 import net.minecraft.world.item.Item;
 import org.apache.commons.lang3.tuple.Pair;
-import xyz.starmun.stardust.blocks.StardustOreBlock;
+import xyz.starmun.stardust.blocks.StateBasedOreBlock;
 import xyz.starmun.stardust.datamodels.Properties;
 import xyz.starmun.stardust.datamodels.StardustOreModel;
 import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
@@ -15,15 +16,17 @@ import java.io.File;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
 public class OreBlockRegistry {
     private static final String JSON = ".json";
-    public static final HashMap<String,StardustOreBlock> REGISTERED_ORE_BLOCKS = new HashMap<>();
+    public static final HashMap<String, StateBasedOreBlock> REGISTERED_ORE_BLOCKS = new HashMap<>();
     public static final Set<Item> REGISTERED_ORE_ITEMS = new HashSet<>();
-    public static HashMap<String, StardustOreBlock> register(){
+    private static final Map<String, Item> REGISTERED_DYNAMIC_ITEMS = new HashMap<>();
+    public static HashMap<String, StateBasedOreBlock> register(){
         LOGGER.info("Loading Custom Ores...");
         FilesUtil.crawlJsonFiles(PathExpectPlatform.getOresConfigPath())
                 .forEach((file)->{
@@ -32,11 +35,19 @@ public class OreBlockRegistry {
                 });
         LOGGER.info("Loaded Custom Ores!");
         return REGISTERED_ORE_BLOCKS;
-    }
+    } 
 
     private static <T> void registerOre(StardustOreModel ore) {
-        StardustOreBlock block = (StardustOreBlock) BlockRegistryExpectPlatform.register(new Properties(ore.getName()));
+        StateBasedOreBlock block = (StateBasedOreBlock) BlockRegistryExpectPlatform.register(new Properties(ore.getName()));
         REGISTERED_ORE_BLOCKS.put(ore.getName(), block);
         REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(ore.getName(), block));
+        registerDynamicOreItems(ore.getName());
+    }
+
+    private static void registerDynamicOreItems(String name) {
+        ItemDataModelRegistry.REGISTERED_ORE_BLOCKS.forEach((s, dynamicItemModel) ->{
+            Item item = ItemRegistryExpectPlatform.register(name+"_"+dynamicItemModel.getName());
+            REGISTERED_DYNAMIC_ITEMS.put(name+"_"+dynamicItemModel.getName(), item);
+        });
     }
 }

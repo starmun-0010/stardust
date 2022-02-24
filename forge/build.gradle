@@ -38,6 +38,7 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
 
     modRuntimeOnly "curse.maven:world-stripper-250603:3415529"
+    modRuntimeOnly "curse.maven:more-overlays-updated-391382:3556279"
     modRuntimeOnly "curse.maven:the-one-probe-245211:3319255"
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }

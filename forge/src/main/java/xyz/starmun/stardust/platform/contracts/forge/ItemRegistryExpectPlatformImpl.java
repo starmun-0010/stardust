@@ -10,7 +10,12 @@ import static xyz.starmun.stardust.forge.StardustForge.ITEMS;
 public class ItemRegistryExpectPlatformImpl {
     public static Item register(String name, Block block){
         Item item = new BlockItem(block, new Item.Properties().tab(CreativeModeTab.TAB_MISC));
-         ITEMS.register(name, () -> item);
-         return item;
+        ITEMS.register(name, () -> item);
+        return item;
+    }
+    public static Item register(String name){
+        Item item = new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC));
+        ITEMS.register(name, () -> item);
+        return item;
     }
 }

@@ -13,31 +13,40 @@ public class PathExpectPlatformImpl {
     public static Path getConfigPath() throws IOException {
         try {
             return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID));
-        }
-        catch (IOException exception){
+        } catch (IOException exception) {
             Stardust.LOGGER.error("Error occurred trying to create config directory.");
             throw new IOException();
         }
     }
+
     public static Path getOresConfigPath() throws IOException {
         try {
-           return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID).resolve(Constants.ORES_DIRECTORY));
-        }
-        catch (IOException exception){
+            return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID).resolve(Constants.ORES_DIRECTORY));
+        } catch (IOException exception) {
             Stardust.LOGGER.error("Error occurred trying to create config directory.");
             throw new IOException();
         }
     }
+
     public static Path getStonesConfigPath() throws IOException {
         try {
             return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID).resolve(Constants.STONES_DIRECTORY));
-        }
-        catch (IOException exception){
+        } catch (IOException exception) {
             Stardust.LOGGER.error("Error occurred trying to create config directory.");
             throw new IOException();
         }
     }
+
     public static Path getStardustModJarResourcesPath() {
         return ModList.get().getModFileById(Stardust.MOD_ID).getFile().getFilePath();
+    }
+
+    public static Path getDynamicItemsConfigPath() throws IOException {
+        try {
+            return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID).resolve(Constants.DYNAMIC_ITEMS_DIRECTORY));
+        } catch (IOException exception) {
+            Stardust.LOGGER.error("Error occurred trying to create config directory.");
+            throw new IOException();
+        }
     }
 }
