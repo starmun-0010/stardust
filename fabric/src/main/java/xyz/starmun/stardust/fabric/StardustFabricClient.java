@@ -21,5 +21,9 @@ public class StardustFabricClient implements ClientModInitializer {
             ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
                new ItemColorHandler().getColor(stack,tintIndex)
             , item));
+        OreBlockRegistry.REGISTERED_DYNAMIC_ITEMS.forEach((key,value)->
+            ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+               new ItemColorHandler().getColor(stack,tintIndex)
+            , value));
     }
 }

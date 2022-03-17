@@ -13,7 +13,7 @@ import java.util.HashMap;
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
 public class ItemDataModelRegistry {
-    public static HashMap<String, DynamicItemModel> REGISTERED_ORE_BLOCKS = new HashMap<>();
+    public static HashMap<String, DynamicItemModel> REGISTERED_ITEM_MODEL = new HashMap<>();
     public static HashMap<String, DynamicItemModel> register(){
         LOGGER.info("Loading dynamic item models...");
         FilesUtil.crawlJsonFiles(PathExpectPlatform.getDynamicItemsConfigPath())
@@ -22,10 +22,10 @@ public class ItemDataModelRegistry {
                     registerItemModel(JsonUtil.parseJson(pair.getRight(), pair.getLeft().getName(), DynamicItemModel.class));
                 });
         LOGGER.info("Loaded dynamic item models!");
-        return REGISTERED_ORE_BLOCKS;
+        return REGISTERED_ITEM_MODEL;
     }
 
     private static void registerItemModel(DynamicItemModel dynamicItemModel) {
-        REGISTERED_ORE_BLOCKS.put(dynamicItemModel.getName(),  dynamicItemModel);
+        REGISTERED_ITEM_MODEL.put(dynamicItemModel.getName(),  dynamicItemModel);
     }
 }

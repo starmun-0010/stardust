@@ -29,14 +29,13 @@ configurations {
 }
 
 repositories {
-    maven{
+    maven {
         url "https://cursemaven.com"
     }
 }
-
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
-
+    modRuntimeOnly "curse.maven:jei-238222:3681294"
     modRuntimeOnly "curse.maven:world-stripper-250603:3415529"
     modRuntimeOnly "curse.maven:more-overlays-updated-391382:3556279"
     modRuntimeOnly "curse.maven:the-one-probe-245211:3319255"

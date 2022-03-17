@@ -1,13 +1,15 @@
 package xyz.starmun.stardust.registry;
 
-import com.ibm.icu.impl.CalendarCache;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import org.apache.commons.lang3.tuple.Pair;
+import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.blocks.StateBasedOreBlock;
 import xyz.starmun.stardust.datamodels.Properties;
 import xyz.starmun.stardust.datamodels.StardustOreModel;
 import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ItemRegistryExpectPlatform;
+import xyz.starmun.stardust.platform.contracts.ModelRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.PathExpectPlatform;
 import xyz.starmun.stardust.utils.FilesUtil;
 import xyz.starmun.stardust.utils.JsonUtil;
@@ -25,7 +27,7 @@ public class OreBlockRegistry {
     private static final String JSON = ".json";
     public static final HashMap<String, StateBasedOreBlock> REGISTERED_ORE_BLOCKS = new HashMap<>();
     public static final Set<Item> REGISTERED_ORE_ITEMS = new HashSet<>();
-    private static final Map<String, Item> REGISTERED_DYNAMIC_ITEMS = new HashMap<>();
+    public static final Map<String, Item> REGISTERED_DYNAMIC_ITEMS = new HashMap<>();
     public static HashMap<String, StateBasedOreBlock> register(){
         LOGGER.info("Loading Custom Ores...");
         FilesUtil.crawlJsonFiles(PathExpectPlatform.getOresConfigPath())
@@ -45,9 +47,10 @@ public class OreBlockRegistry {
     }
 
     private static void registerDynamicOreItems(String name) {
-        ItemDataModelRegistry.REGISTERED_ORE_BLOCKS.forEach((s, dynamicItemModel) ->{
+        ItemDataModelRegistry.REGISTERED_ITEM_MODEL.forEach((s, dynamicItemModel) ->{
             Item item = ItemRegistryExpectPlatform.register(name+"_"+dynamicItemModel.getName());
             REGISTERED_DYNAMIC_ITEMS.put(name+"_"+dynamicItemModel.getName(), item);
+            ModelRegistryExpectPlatform.register(Stardust.MOD_ID+":"+"item/"+dynamicItemModel.getName());
         });
     }
 }

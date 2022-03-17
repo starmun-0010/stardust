@@ -4,10 +4,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.SimpleModelTransform;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -20,6 +27,7 @@ import xyz.starmun.stardust.blocks.colorhandlers.BlockColorHandler;
 import xyz.starmun.stardust.datamodels.Stratum;
 import xyz.starmun.stardust.forge.datagen.StratumBasedOreBlockModel;
 import xyz.starmun.stardust.item.ItemColorHandler;
+import xyz.starmun.stardust.registry.ItemDataModelRegistry;
 import xyz.starmun.stardust.registry.OreBlockRegistry;
 import xyz.starmun.stardust.registry.StrataRegistry;
 
@@ -36,15 +44,39 @@ public class StardustForge {
         Stardust.init();
     }
     @SubscribeEvent
+    public static void onModelRegistryEvent(ModelRegistryEvent event) {
+
+    }
+    @SubscribeEvent
+    public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
+//        event.addSprite(new ResourceLocation("stardust:blocks/overlays/metallic_ore_a"));
+//        event.addSprite(new ResourceLocation("stardust:blocks/overlays/metallic_ore_b"));
+//        event.addSprite(new ResourceLocation("stardust:blocks/overlays/metallic_ore_c"));
+//        event.addSprite(new ResourceLocation("stardust:blocks/overlays/metallic_ore_d"));
+//        event.addSprite(new ResourceLocation("stardust:items/rod/rod_1"));
+//        event.addSprite(new ResourceLocation("stardust:items/rod/rod_2"));
+//        event.addSprite(new ResourceLocation("stardust:items/plate/plate_1"));
+//        event.addSprite(new ResourceLocation("stardust:items/plate/plate_2"));
+    }
+    @SubscribeEvent
     public static void onModelBakeEvent(ModelBakeEvent event){
 
         OreBlockRegistry.REGISTERED_ORE_BLOCKS.forEach((id,block)->{
             for (Stratum stratum : StrataRegistry.STRATA) {
                 StratumBasedOreBlockModel customModel = new StratumBasedOreBlockModel(stratum);
                 event.getModelRegistry()
-                        .put(BlockModelShaper.stateToModelLocation(block.getStateDefinition()
-                                .any().setValue(StateBasedOreBlock.STRATUM, stratum.id)),customModel);
+                    .put(BlockModelShaper.stateToModelLocation(block.getStateDefinition()
+                        .any().setValue(StateBasedOreBlock.STRATUM, stratum.id)),customModel);
             }
+        });
+//        ItemDataModelRegistry.REGISTERED_ITEM_MODEL.forEach((modelName, dynamicItemModel) -> {
+//            ModelLoader.instance().bake(new ResourceLocation("stardust:item/"+modelName), SimpleModelTransform.IDENTITY);
+//        });
+        OreBlockRegistry.REGISTERED_DYNAMIC_ITEMS.forEach((id,item)->{
+            event.getModelRegistry()
+               .put(new ModelResourceLocation(Stardust.MOD_ID+":"+id,"inventory"),
+                   ModelLoader.instance().bake(new ResourceLocation("stardust:item/"+id.substring(id.lastIndexOf("_")+1)), SimpleModelTransform.IDENTITY));
+            //event.getModelRegistry().get(new ModelResourceLocation(Stardust.MOD_ID+":"+ItemDataModelRegistry.REGISTERED_ITEM_MODEL.get(id.substring(id.lastIndexOf("_")+1)).getBaseModel(), "inventory")));
         });
     }
    
@@ -57,6 +89,10 @@ public class StardustForge {
             Minecraft.getInstance().getItemColors()
                     .register( new ItemColorHandler(),
                             OreBlockRegistry.REGISTERED_ORE_ITEMS
+                                    .toArray(new Item[0]));
+            Minecraft.getInstance().getItemColors()
+                    .register( new ItemColorHandler(),
+                            OreBlockRegistry.REGISTERED_DYNAMIC_ITEMS.values()
                                     .toArray(new Item[0]));
         });
         for (Block block : OreBlockRegistry.REGISTERED_ORE_BLOCKS.values()) {

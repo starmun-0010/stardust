@@ -3,7 +3,6 @@ package xyz.starmun.stardust.forge.datagen;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormatElement;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -22,12 +21,10 @@ import xyz.starmun.stardust.datamodels.Stratum;
 import xyz.starmun.stardust.registry.StrataRegistry;
 
 import java.util.*;
-import java.util.function.Function;
 
-public class StratumBasedOreBlockModel implements BakedModel, UnbakedModel {
+public class StratumBasedOreBlockModel implements BakedModel {
     private static final Material[] materials = new Material[StrataRegistry.STRATA.size()];
     private final Stratum stratum;
-    private TextureAtlasSprite[] sprites = new TextureAtlasSprite[StrataRegistry.STRATA.size()];
     static {
         StrataRegistry.STRATA.forEach(stratum -> {
             new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(stratum.baseTexture));
@@ -87,15 +84,7 @@ public class StratumBasedOreBlockModel implements BakedModel, UnbakedModel {
         return builder.build();
     }
 
-    @Override
-    public Collection<ResourceLocation> getDependencies() {
-        return null;
-    }
 
-    @Override
-    public Collection<Material> getMaterials(Function<ResourceLocation, UnbakedModel> function, Set<Pair<String, String>> set) {
-        return null;
-    }
     private void addScaledModelQuads(BakedModel original, Vector3f scaleFactor, Direction sides,
                                      ImmutableList.Builder<BakedQuad> quadListBuilder) {
         final Random random = new Random();
@@ -169,15 +158,5 @@ public class StratumBasedOreBlockModel implements BakedModel, UnbakedModel {
             return -i;
         }
         return 0;
-    }
-
-    @Nullable
-    @Override
-    public BakedModel bake(ModelBakery modelBakery, Function<Material, TextureAtlasSprite> textureGetter, ModelState modelState, ResourceLocation arg3) {
-
-        for (int i = 0; i < sprites.length; i++) {
-            sprites[i]= textureGetter.apply(materials[i]);
-        }
-        return this;
     }
 }
