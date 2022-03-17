@@ -4,6 +4,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import xyz.starmun.stardust.item.StardustItem;
 
 import static xyz.starmun.stardust.forge.StardustForge.ITEMS;
 
@@ -13,8 +14,8 @@ public class ItemRegistryExpectPlatformImpl {
         ITEMS.register(name, () -> item);
         return item;
     }
-    public static Item register(String name){
-        Item item = new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC));
+    public static StardustItem register(String name){
+        StardustItem item = new StardustItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC));
         ITEMS.register(name, () -> item);
         return item;
     }

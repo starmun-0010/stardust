@@ -27,7 +27,6 @@ import xyz.starmun.stardust.blocks.colorhandlers.BlockColorHandler;
 import xyz.starmun.stardust.datamodels.Stratum;
 import xyz.starmun.stardust.forge.datagen.StratumBasedOreBlockModel;
 import xyz.starmun.stardust.item.ItemColorHandler;
-import xyz.starmun.stardust.registry.ItemDataModelRegistry;
 import xyz.starmun.stardust.registry.OreBlockRegistry;
 import xyz.starmun.stardust.registry.StrataRegistry;
 
@@ -49,14 +48,7 @@ public class StardustForge {
     }
     @SubscribeEvent
     public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
-//        event.addSprite(new ResourceLocation("stardust:blocks/overlays/metallic_ore_a"));
-//        event.addSprite(new ResourceLocation("stardust:blocks/overlays/metallic_ore_b"));
-//        event.addSprite(new ResourceLocation("stardust:blocks/overlays/metallic_ore_c"));
-//        event.addSprite(new ResourceLocation("stardust:blocks/overlays/metallic_ore_d"));
-//        event.addSprite(new ResourceLocation("stardust:items/rod/rod_1"));
-//        event.addSprite(new ResourceLocation("stardust:items/rod/rod_2"));
-//        event.addSprite(new ResourceLocation("stardust:items/plate/plate_1"));
-//        event.addSprite(new ResourceLocation("stardust:items/plate/plate_2"));
+
     }
     @SubscribeEvent
     public static void onModelBakeEvent(ModelBakeEvent event){
@@ -69,14 +61,11 @@ public class StardustForge {
                         .any().setValue(StateBasedOreBlock.STRATUM, stratum.id)),customModel);
             }
         });
-//        ItemDataModelRegistry.REGISTERED_ITEM_MODEL.forEach((modelName, dynamicItemModel) -> {
-//            ModelLoader.instance().bake(new ResourceLocation("stardust:item/"+modelName), SimpleModelTransform.IDENTITY);
-//        });
+
         OreBlockRegistry.REGISTERED_DYNAMIC_ITEMS.forEach((id,item)->{
             event.getModelRegistry()
                .put(new ModelResourceLocation(Stardust.MOD_ID+":"+id,"inventory"),
                    ModelLoader.instance().bake(new ResourceLocation("stardust:item/"+id.substring(id.lastIndexOf("_")+1)), SimpleModelTransform.IDENTITY));
-            //event.getModelRegistry().get(new ModelResourceLocation(Stardust.MOD_ID+":"+ItemDataModelRegistry.REGISTERED_ITEM_MODEL.get(id.substring(id.lastIndexOf("_")+1)).getBaseModel(), "inventory")));
         });
     }
    

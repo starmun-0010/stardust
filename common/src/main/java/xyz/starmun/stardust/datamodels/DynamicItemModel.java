@@ -1,21 +1,16 @@
 package xyz.starmun.stardust.datamodels;
 
-import net.minecraft.client.resources.model.ModelBakery;
-
 public class DynamicItemModel {
     private String name;
-    private String baseModel;
+    private String[] colors;
 
-    private DynamicItemModel(String name, String baseModel){
-        this.name = name;
-        this.baseModel = baseModel;
-
+    private DynamicItemModel(){
     }
     public String getName() {
         return name;
     }
-    public String getBaseModel(){
-        return baseModel;
+    public String[] getColors() {
+        return colors;
     }
 
     public static class Builder{
