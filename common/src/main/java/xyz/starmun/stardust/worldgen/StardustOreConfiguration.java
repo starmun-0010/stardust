@@ -12,8 +12,8 @@ import xyz.starmun.stardust.datamodels.Stratum;
 public class StardustOreConfiguration {
     public static ConfiguredFeature<?, ?> getConfigured(StateBasedOreBlock block, Stratum stratum) {
         return Feature.ORE.configured(new OreConfiguration(
-                new BlockMatchTest(stratum.block.get()),
-                block.getStateDefinition().any().setValue(StateBasedOreBlock.STRATUM, stratum.id)
+                new BlockMatchTest(stratum.getBlock().get()),
+                block.getStateDefinition().any().setValue(StateBasedOreBlock.STRATUM, stratum.getId())
                 , 16))
                 .decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(3, 3, 222))).squared()
                 .count(64);

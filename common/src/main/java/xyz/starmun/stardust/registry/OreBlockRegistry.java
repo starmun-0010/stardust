@@ -1,12 +1,10 @@
 package xyz.starmun.stardust.registry;
 
-import com.mojang.serialization.Codec;
 import org.apache.commons.lang3.tuple.Pair;
 import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.blocks.StateBasedOreBlock;
 import xyz.starmun.stardust.datamodels.Properties;
 import xyz.starmun.stardust.datamodels.Ore;
-import xyz.starmun.stardust.datamodels.Stratum;
 import xyz.starmun.stardust.item.StardustItem;
 import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ItemRegistryExpectPlatform;
@@ -46,11 +44,11 @@ public class OreBlockRegistry {
     private static void registerDynamicOreItems(String name,  Ore ore) {
         ItemDataModelRegistry.REGISTERED_ITEM_MODEL.forEach((s, dynamicItemModel) ->{
             StardustItem item = ItemRegistryExpectPlatform.register(name+"_"+dynamicItemModel.getName());
-            if(ore.items.containsKey(dynamicItemModel.getName())){
-                item.colors = ore.items.get(dynamicItemModel.getName()).getColor().toArray(new String[0]);
+            if(ore.getItems().containsKey(dynamicItemModel.getName())){
+                item.colors = ore.getItems().get(dynamicItemModel.getName()).getColor().toArray(new String[0]);
             }
             else {
-                item.colors = ore.colors.toArray(new String[0]);
+                item.colors = ore.getColors().toArray(new String[0]);
             }
             item.name = dynamicItemModel.getName();
             REGISTERED_DYNAMIC_ITEMS.put(name+"_"+dynamicItemModel.getName(), item);

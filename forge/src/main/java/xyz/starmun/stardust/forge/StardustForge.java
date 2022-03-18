@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -58,7 +57,7 @@ public class StardustForge {
                 StratumBasedOreBlockModel customModel = new StratumBasedOreBlockModel(stratum);
                 event.getModelRegistry()
                     .put(BlockModelShaper.stateToModelLocation(block.getStateDefinition()
-                        .any().setValue(StateBasedOreBlock.STRATUM, stratum.id)),customModel);
+                        .any().setValue(StateBasedOreBlock.STRATUM, stratum.getId())),customModel);
             }
         });
 

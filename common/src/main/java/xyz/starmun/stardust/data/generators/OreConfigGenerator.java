@@ -1,6 +1,5 @@
 package xyz.starmun.stardust.data.generators;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.data.HashCache;
 import xyz.starmun.stardust.Stardust;
@@ -21,7 +20,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -33,7 +32,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -45,7 +44,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -57,7 +56,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -69,7 +68,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -81,7 +80,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -93,7 +92,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -105,7 +104,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -117,7 +116,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -129,7 +128,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -141,7 +140,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -153,7 +152,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -165,7 +164,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -177,7 +176,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -189,7 +188,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -201,7 +200,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -213,7 +212,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -225,7 +224,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -237,7 +236,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -250,7 +249,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -263,7 +262,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -275,7 +274,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -288,7 +287,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -301,7 +300,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -314,7 +313,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -327,7 +326,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -340,7 +339,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -353,7 +352,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -366,7 +365,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -379,7 +378,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -392,7 +391,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -405,7 +404,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -418,7 +417,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -431,7 +430,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -444,7 +443,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -457,7 +456,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -470,7 +469,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.builder
+                    .addItem(Ore.Item.getBuilder()
                             .setNameSuffix("gear")
                             .setColors(new ArrayList<String>(){{
                                 add("");
@@ -485,7 +484,7 @@ public class OreConfigGenerator extends DataProviderBase {
                     .mapError(OreConfigGenerator::onError)
                     .result()
                     .ifPresent(jsonElement->
-                            FilesUtil.saveJsonFile(StardustPaths.DataGen.DEFAULT_ORE_FILES_GENERATION_PATH + ore.id, jsonElement, hashCache));
+                            FilesUtil.saveJsonFile(StardustPaths.DataGen.DEFAULT_ORE_FILES_GENERATION_PATH + ore.getId(), jsonElement, hashCache));
         });
     }
 

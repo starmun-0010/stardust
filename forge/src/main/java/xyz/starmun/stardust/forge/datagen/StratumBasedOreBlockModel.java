@@ -27,7 +27,7 @@ public class StratumBasedOreBlockModel implements BakedModel {
     private final Stratum stratum;
     static {
         StrataRegistry.STRATA.forEach(stratum -> {
-            new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(stratum.baseTexture));
+            new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(stratum.getBaseTexture()));
         });
     }
 
@@ -75,7 +75,7 @@ public class StratumBasedOreBlockModel implements BakedModel {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
         ImmutableList.Builder<BakedQuad> builder = ImmutableList.builder();
         BakedModel oreModel = ModelLoader.instance().bake(new ResourceLocation("stardust:block/ore"), SimpleModelTransform.IDENTITY);
-        builder.addAll(ModelLoader.instance().bake(new ResourceLocation(stratum.modId+":block/"+ stratum.blockId), SimpleModelTransform.IDENTITY).getQuads(state,side,rand));
+        builder.addAll(ModelLoader.instance().bake(new ResourceLocation(stratum.getModId() +":block/"+ stratum.getBlockId()), SimpleModelTransform.IDENTITY).getQuads(state,side,rand));
 
         Vector3f scaleFactor = new Vector3f(0.005F, 0.005F, 0.005F);
         //Translate to world coordinates

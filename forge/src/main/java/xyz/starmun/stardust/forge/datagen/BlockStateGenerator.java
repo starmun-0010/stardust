@@ -20,14 +20,14 @@ public class BlockStateGenerator extends BlockStateProvider {
     protected void registerStatesAndModels() {
         OreBlockRegistry.REGISTERED_ORE_BLOCKS.forEach((id, block)->{
             StrataRegistry.STRATA.forEach(strata->{
-                String loc = block.getRegistryName().getPath()+"_"+strata.id;
+                String loc = block.getRegistryName().getPath()+"_"+ strata.getId();
                 this.models().getBuilder(loc)
                         .parent(new ModelFile.UncheckedModelFile(mcLoc("block/block")))
-                        .texture("base", new ResourceLocation(strata.baseTexture))
+                        .texture("base", new ResourceLocation(strata.getBaseTexture()))
                         .element()
                         .cube("#base")
                         .end();
-                strataStateBasedOreBlock(block, strata.id, new ModelFile.UncheckedModelFile(modLoc("block/")));
+                strataStateBasedOreBlock(block, strata.getId(), new ModelFile.UncheckedModelFile(modLoc("block/")));
             });
         });
     }

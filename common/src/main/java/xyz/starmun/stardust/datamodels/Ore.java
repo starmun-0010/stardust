@@ -12,11 +12,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Ore {
-    public final String id;
-    public final List<String> colors;
-    public final Map<String, Item> items;
-    //public final BlockModel[] blocks;
-    //public final BlockItemModel[] blockItemModels;
+    private String id;
+    private List<String> colors;
+    private Map<String, Item> items;
+
     public static final Codec<Ore> CODEC = RecordCodecBuilder.create((instance)->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter((Ore ore)-> ore.id),
@@ -54,6 +53,10 @@ public class Ore {
         return items;
     }
 
+    public List<String> getColors() {
+        return colors;
+    }
+
     public static class Builder{
         private String id;
         private List<String> colors;
@@ -77,7 +80,7 @@ public class Ore {
     public static class Item {
         private String idSuffix;
         private List<String> colors;
-        public static Builder builder = new Builder();
+        private static Builder builder = new Builder();
         public static final Codec<Item> CODEC = RecordCodecBuilder.create((instance)->
                 instance.group(
                         Codec.STRING.fieldOf("idSuffix").forGetter((Item item)-> item.idSuffix),
@@ -87,11 +90,20 @@ public class Ore {
             this.idSuffix = idSuffix;
             this.colors = colors;
         }
+
+        public static Builder getBuilder() {
+            return builder;
+        }
+
         public List<String> getColor() {
             return colors;
         }
         public String getIdSuffix() {
             return idSuffix;
+        }
+
+        public List<String> getColors() {
+            return colors;
         }
 
         public static class Builder{
@@ -110,10 +122,5 @@ public class Ore {
                 return new Item(this.nameSuffix, this.colors);
             }
         }
-    }
-    public static class BlockModel {
-    }
-    public static class BlockItemModel{
-
     }
 }

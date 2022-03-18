@@ -13,7 +13,7 @@ public class OreGenFeatureRegistry {
             StrataRegistry.STRATA.forEach(stratum -> blocks.forEach((oreName, block)->{
             ConfiguredFeature<?, ?> configuredFeature = StardustOreConfiguration
                     .getConfigured(block, stratum);
-                BiomeModificationExpectPlatform.addOreFeature(oreName, stratum.id, configuredFeature);
+                BiomeModificationExpectPlatform.addOreFeature(oreName, stratum.getId(), configuredFeature);
             }));
     }
 }

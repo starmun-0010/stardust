@@ -18,7 +18,7 @@ public class StateBasedOreBlock extends OreBlock {
         protected final ImmutableMap<String,String> values;
         public StringProperty(String name) {
             super(name, String.class);
-            this.values = ImmutableMap.copyOf(StrataRegistry.STRATA.stream().map(stratum -> stratum.id).collect(Collectors.toMap(Function.identity(), Function.identity())));
+            this.values = ImmutableMap.copyOf(StrataRegistry.STRATA.stream().map(stratum -> stratum.getId()).collect(Collectors.toMap(Function.identity(), Function.identity())));
         }
 
         @Override
