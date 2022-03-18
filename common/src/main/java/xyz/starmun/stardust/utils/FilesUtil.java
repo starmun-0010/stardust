@@ -1,6 +1,11 @@
 package xyz.starmun.stardust.utils;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.HashCache;
 import org.apache.commons.lang3.tuple.Pair;
+import xyz.starmun.stardust.data.generators.DataProviderBase;
 import xyz.starmun.stardust.platform.contracts.PathExpectPlatform;
 
 import java.io.File;
@@ -20,7 +25,7 @@ public final class FilesUtil{
     private FilesUtil(){
 
     }
-    private static final String JSON = ".json";
+    public static final String JSON = ".json";
     public static Path getStardustModJarResourcesPath(){
         return PathExpectPlatform.getStardustModJarResourcesPath();
     }
@@ -43,5 +48,16 @@ public final class FilesUtil{
             LOGGER.error("File load failed: " + (file == null ? "" : file.getName()));
         }
         return null;
+    }
+    public static void saveJsonFile(String path, JsonElement jsonElement, HashCache hashCache) {
+        try {
+            DataProvider.save(new GsonBuilder().setPrettyPrinting().create(),
+                    hashCache,
+                    jsonElement,
+                    Paths.get(DataProviderBase.dataGenerator.getOutputFolder().toString(),
+                          path + FilesUtil.JSON));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

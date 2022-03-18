@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "stratum=minecraft_andesite": {
+      "model": "stardust:block/"
+    },
+    "stratum=minecraft_diorite": {
+      "model": "stardust:block/"
+    },
+    "stratum=minecraft_granite": {
+      "model": "stardust:block/"
+    },
+    "stratum=minecraft_gravel": {
+      "model": "stardust:block/"
+    },
+    "stratum=minecraft_netherrack": {
+      "model": "stardust:block/"
+    },
+    "stratum=minecraft_sand": {
+      "model": "stardust:block/"
+    },
+    "stratum=minecraft_sandstone": {
+      "model": "stardust:block/"
+    },
+    "stratum=minecraft_stone": {
+      "model": "stardust:block/"
+    }
+  }
+}

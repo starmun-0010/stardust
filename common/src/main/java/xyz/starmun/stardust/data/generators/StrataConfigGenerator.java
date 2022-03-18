@@ -15,14 +15,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StrataGenerator extends DataProviderBase {
+public class StrataConfigGenerator extends DataProviderBase {
 
     private static void save(JsonElement jsonElement, HashCache hashCache) {
         try {
             DataProvider.save(new GsonBuilder().setPrettyPrinting().create(),
                     hashCache,
                     jsonElement,
-                    Paths.get(DataProviderBase.dataGenerator.getOutputFolder().toString(), StardustPaths.DEFAULT_STRATA_FILE_GENERATION_PATH));
+                    Paths.get(DataProviderBase.dataGenerator.getOutputFolder().toString(), StardustPaths.DataGen.DEFAULT_STRATA_FILE_GENERATION_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class StrataGenerator extends DataProviderBase {
         }};
         JsonOps.INSTANCE.withEncoder(Codec.list(Stratum.CODEC))
                 .apply(strata)
-                .mapError(StrataGenerator::onError)
+                .mapError(StrataConfigGenerator::onError)
                 .result()
                 .ifPresent(jsonElement-> save(jsonElement,hashCache));
     }

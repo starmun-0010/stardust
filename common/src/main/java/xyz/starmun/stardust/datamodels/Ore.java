@@ -33,7 +33,7 @@ public class Ore {
     }
 
     private static DataResult<Map<String, Item>> toGenerationType(List<Item> items) {
-        return DataResult.success(items.stream().collect(Collectors.toMap(item->item.nameSuffix, Function.identity())));
+        return DataResult.success(items.stream().collect(Collectors.toMap(item->item.idSuffix, Function.identity())));
     }
 
 
@@ -67,7 +67,7 @@ public class Ore {
             return this;
         }
         public Builder addItem(Item item){
-            this.itemModels.put(item.nameSuffix, item);
+            this.itemModels.put(item.idSuffix, item);
             return this;
         }
         public Ore build(){
@@ -75,23 +75,23 @@ public class Ore {
         }
     }
     public static class Item {
-        private String nameSuffix;
+        private String idSuffix;
         private List<String> colors;
         public static Builder builder = new Builder();
         public static final Codec<Item> CODEC = RecordCodecBuilder.create((instance)->
                 instance.group(
-                        Codec.STRING.fieldOf("nameSuffix").forGetter((Item item)-> item.nameSuffix),
+                        Codec.STRING.fieldOf("idSuffix").forGetter((Item item)-> item.idSuffix),
                         Codec.STRING.listOf().fieldOf("colors").forGetter((Item item)-> item.colors))
                         .apply(instance, (id, colors)-> new Item(id, colors)));
-        private Item(String nameSuffix, List<String> colors){
-            this.nameSuffix = nameSuffix;
+        private Item(String idSuffix, List<String> colors){
+            this.idSuffix = idSuffix;
             this.colors = colors;
         }
         public List<String> getColor() {
             return colors;
         }
-        public String getNameSuffix() {
-            return nameSuffix;
+        public String getIdSuffix() {
+            return idSuffix;
         }
 
         public static class Builder{
