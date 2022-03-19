@@ -1,9 +1,13 @@
 {
   "id": "aluminum",
-  "colors": [
-    ""
-  ],
   "items": [
+    {
+      "idSuffix": "ore",
+      "colors": [
+        ""
+      ],
+      "generationType": "BlockItem"
+    },
     {
       "idSuffix": "gear",
       "colors": [

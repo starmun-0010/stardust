@@ -3,40 +3,37 @@ package xyz.starmun.stardust.datamodels;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import xyz.starmun.stardust.utils.EnumUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Ore {
-    private String id;
-    private List<String> colors;
-    private Map<String, Item> items;
+    private final String id;
+    private final List<String> colors;
+    private final Map<String, Item> items;
 
     public static final Codec<Ore> CODEC = RecordCodecBuilder.create((instance)->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter((Ore ore)-> ore.id),
-                    Codec.STRING.listOf().fieldOf("colors").forGetter((Ore ore)-> ore.colors),
+                    Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Ore ore)-> Optional.ofNullable(ore.colors)),
                     Item.CODEC.listOf().fieldOf("items")
-                            .flatXmap(Ore::toGenerationType, Ore::fromGenerationType)
+                            .flatXmap(Ore::fromListToMap, Ore::fromMapToList)
                             .forGetter((Ore ore) -> ore.items))
-                    .apply(instance, (id, colors, items)->
-                            new Ore(id, colors, items))
+                    .apply(instance, (id, colors,items)->
+                            new Ore(id, colors.orElse(new ArrayList<>()), items))
     );
 
-    private static  DataResult<List<Item>> fromGenerationType(Map<String, Item>  items) {
+    private static  DataResult<List<Item>> fromMapToList(Map<String, Item>  items) {
         return DataResult.success(new ArrayList<>(items.values()));
     }
 
-    private static DataResult<Map<String, Item>> toGenerationType(List<Item> items) {
+    private static DataResult<Map<String, Item>> fromListToMap(List<Item> items) {
         return DataResult.success(items.stream().collect(Collectors.toMap(item->item.idSuffix, Function.identity())));
     }
 
-
-    public static Builder builder = new Builder();
+    public static Builder instance(){return new Builder();};
     private Ore(String id, List<String> colors, Map<String, Item> items){
         this.id = id;
         this.colors = colors;
@@ -73,26 +70,33 @@ public class Ore {
             this.itemModels.put(item.idSuffix, item);
             return this;
         }
+
         public Ore build(){
             return new Ore(this.id, this.colors, this.itemModels);
         }
     }
     public static class Item {
-        private String idSuffix;
-        private List<String> colors;
-        private static Builder builder = new Builder();
+        private final String idSuffix;
+        private final List<String> colors;
+        private final RegistrationType registrationType;
+        public static Builder instance(){return new Builder();};
         public static final Codec<Item> CODEC = RecordCodecBuilder.create((instance)->
                 instance.group(
                         Codec.STRING.fieldOf("idSuffix").forGetter((Item item)-> item.idSuffix),
-                        Codec.STRING.listOf().fieldOf("colors").forGetter((Item item)-> item.colors))
-                        .apply(instance, (id, colors)-> new Item(id, colors)));
-        private Item(String idSuffix, List<String> colors){
-            this.idSuffix = idSuffix;
-            this.colors = colors;
-        }
+                        Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Item item)-> Optional.ofNullable(item.colors)),
+                        Codec.STRING.xmap(value->EnumUtil.fromStringToEnum(RegistrationType.class,value),
+                                EnumUtil::fromEnumToString)
+                                .optionalFieldOf("generationType")
+                                .forGetter((Item item) -> (Optional.ofNullable(item.registrationType))))
+                        .apply(instance, (id,colors,registrationType)->
+                                new Item(id,colors.orElse(new ArrayList<>()),registrationType.orElse(RegistrationType.Item)))
 
-        public static Builder getBuilder() {
-            return builder;
+        );
+
+        private Item(String idSuffix, List<String> colors, RegistrationType registrationType){
+            this.idSuffix = idSuffix;
+            this.registrationType = registrationType;
+            this.colors = colors;
         }
 
         public List<String> getColor() {
@@ -106,9 +110,15 @@ public class Ore {
             return colors;
         }
 
+        public RegistrationType getRegistrationType() {
+            return registrationType;
+        }
+
         public static class Builder{
             private String nameSuffix;
             private List<String> colors;
+            private RegistrationType registrationType;
+
             public Builder setNameSuffix(String nameSuffix){
                 this.nameSuffix = nameSuffix;
                 return this;
@@ -117,10 +127,19 @@ public class Ore {
                 this.colors = colors;
                 return this;
             }
+            public Builder setRegistrationType(RegistrationType registrationType) {
+                this.registrationType = registrationType;
+                return this;
+            }
 
             public Item build(){
-                return new Item(this.nameSuffix, this.colors);
+                return new Item(this.nameSuffix, this.colors, this.registrationType);
             }
+        }
+        public enum RegistrationType {
+            Item,
+            Block,
+            BlockItem
         }
     }
 }

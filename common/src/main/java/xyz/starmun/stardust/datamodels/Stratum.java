@@ -128,13 +128,6 @@ public class Stratum {
             return this;
         }
 
-    private static Optional<String> eee() {
-        return null;
-    }
-
-    private static Optional<String> ff() {
-        return null;
-    }
         public Builder setBaseTexture(String baseTexture) {
             this.baseTexture = baseTexture;
             return this;
