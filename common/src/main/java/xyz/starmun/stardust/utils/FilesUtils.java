@@ -21,8 +21,8 @@ import java.util.stream.Stream;
 
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
-public final class FilesUtil{
-    private FilesUtil(){
+public final class FilesUtils {
+    private FilesUtils(){
 
     }
     public static final String JSON_FILE_EXTENSION = ".json";
@@ -55,7 +55,7 @@ public final class FilesUtil{
                     hashCache,
                     jsonElement,
                     Paths.get(DataGeneratorsCore.dataGenerator.getOutputFolder().toString(),
-                          path + FilesUtil.JSON_FILE_EXTENSION));
+                          path + FilesUtils.JSON_FILE_EXTENSION));
         } catch (IOException e) {
             e.printStackTrace();
         }

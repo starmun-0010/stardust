@@ -6,10 +6,9 @@ import xyz.starmun.stardust.Stardust;
 import java.util.EnumSet;
 import java.util.stream.Collectors;
 
-public class EnumUtil {
+public class EnumUtils {
     public static  <T extends Enum<T>> T fromStringToEnum(Class<T> enumType, String value) {
         if(value != null && Enums.getIfPresent(enumType,value).isPresent()){
-
             return Enum.valueOf(enumType,value);
         }
         String error = value + " is not a valid value for "+enumType.getName()

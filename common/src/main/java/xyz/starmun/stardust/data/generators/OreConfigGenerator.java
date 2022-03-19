@@ -1,12 +1,11 @@
 package xyz.starmun.stardust.data.generators;
 
-import com.mojang.serialization.JsonOps;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
-import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.constants.StardustPaths;
 import xyz.starmun.stardust.datamodels.Ore;
-import xyz.starmun.stardust.utils.FilesUtil;
+import xyz.starmun.stardust.utils.FilesUtils;
+import xyz.starmun.stardust.utils.JsonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +13,15 @@ import java.util.List;
 public class OreConfigGenerator implements DataProvider {
 
     @Override
+    public String getName() {
+        return "Default Ores Generator";
+    }
+
+    @Override
     public void run(HashCache hashCache) {
         List<Ore> ores = new ArrayList<Ore>(){{
             add(Ore.instance()
                     .setId("aluminum")
-
                     .addItem(Ore.Item.instance()
                             .setNameSuffix("gear")
                             .build())
@@ -368,25 +371,12 @@ public class OreConfigGenerator implements DataProvider {
                             .setNameSuffix("gear")
                             .build())
                     .build());
-
         }};
         ores.forEach(ore -> {
-            JsonOps.INSTANCE.withEncoder(Ore.CODEC)
-                    .apply(ore)
-                    .mapError(OreConfigGenerator::onError)
-                    .result()
+            JsonUtils.serializeToJson(ore, Ore.CODEC)
                     .ifPresent(jsonElement->
-                            FilesUtil.saveJsonFile(StardustPaths.DataGen.DEFAULT_ORE_FILES_GENERATION_PATH + ore.getId(), jsonElement, hashCache));
+                    FilesUtils.saveJsonFile(StardustPaths.DataGen.DEFAULT_ORE_FILES_GENERATION_PATH
+                            + ore.getId(), jsonElement, hashCache));
         });
-    }
-
-    private static String onError(String error) {
-        Stardust.LOGGER.error(error);
-        return error;
-    }
-
-    @Override
-    public String getName() {
-        return "Default Ores Generator";
     }
 }

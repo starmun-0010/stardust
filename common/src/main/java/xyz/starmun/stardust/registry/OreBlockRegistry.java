@@ -10,8 +10,8 @@ import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ItemRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ModelRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.PathExpectPlatform;
-import xyz.starmun.stardust.utils.FilesUtil;
-import xyz.starmun.stardust.utils.JsonUtil;
+import xyz.starmun.stardust.utils.FilesUtils;
+import xyz.starmun.stardust.utils.JsonUtils;
 
 import java.io.File;
 import java.io.Reader;
@@ -25,10 +25,10 @@ public class OreBlockRegistry {
     public static final Map<String, StardustItem> REGISTERED_DYNAMIC_ITEMS = new HashMap<>();
     public static HashMap<String, StateBasedOreBlock> register(){
         LOGGER.info("Loading Custom Ores...");
-        FilesUtil.crawlJsonFiles(PathExpectPlatform.getOresConfigPath())
+        FilesUtils.crawlJsonFiles(PathExpectPlatform.getOresConfigPath())
                 .forEach((file)->{
-                    Pair<File,Reader> pair = FilesUtil.loadFile(file);
-                    registerOre(JsonUtil.parseJson(pair.getRight(), Ore.CODEC));
+                    Pair<File,Reader> pair = FilesUtils.loadFile(file);
+                    registerOre(JsonUtils.parseJson(pair.getRight(), Ore.CODEC));
                 });
         LOGGER.info("Loaded Custom Ores!");
         return REGISTERED_ORE_BLOCKS;

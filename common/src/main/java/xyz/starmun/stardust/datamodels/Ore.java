@@ -3,7 +3,7 @@ package xyz.starmun.stardust.datamodels;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import xyz.starmun.stardust.utils.EnumUtil;
+import xyz.starmun.stardust.utils.EnumUtils;
 
 import java.util.*;
 import java.util.function.Function;
@@ -84,8 +84,8 @@ public class Ore {
                 instance.group(
                         Codec.STRING.fieldOf("idSuffix").forGetter((Item item)-> item.idSuffix),
                         Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Item item)-> Optional.ofNullable(item.colors)),
-                        Codec.STRING.xmap(value->EnumUtil.fromStringToEnum(RegistrationType.class,value),
-                                EnumUtil::fromEnumToString)
+                        Codec.STRING.xmap(value-> EnumUtils.fromStringToEnum(RegistrationType.class,value),
+                                EnumUtils::fromEnumToString)
                                 .optionalFieldOf("generationType")
                                 .forGetter((Item item) -> (Optional.ofNullable(item.registrationType))))
                         .apply(instance, (id,colors,registrationType)->

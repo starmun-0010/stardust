@@ -4,12 +4,13 @@ public class DynamicItemModel {
     private String name;
     private String[] colors;
 
-    private DynamicItemModel(){
+    private DynamicItemModel(String name, String baseModel){
+        this.name = name;
     }
     public String getName() {
         return name;
     }
-    public String[] getColors() {
+    public String[] getColor() {
         return colors;
     }
 

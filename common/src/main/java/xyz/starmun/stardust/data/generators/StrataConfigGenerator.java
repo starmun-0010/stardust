@@ -1,18 +1,22 @@
 package xyz.starmun.stardust.data.generators;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.JsonOps;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
-import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.constants.StardustPaths;
 import xyz.starmun.stardust.datamodels.Stratum;
-import xyz.starmun.stardust.utils.FilesUtil;
+import xyz.starmun.stardust.utils.FilesUtils;
+import xyz.starmun.stardust.utils.JsonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StrataConfigGenerator implements DataProvider {
+
+    @Override
+    public String getName() {
+        return "Default Strata Generator";
+    }
 
     @Override
     public void run(HashCache hashCache) {
@@ -27,21 +31,9 @@ public class StrataConfigGenerator implements DataProvider {
             add(Stratum.builder.setBlockId("sand").build());
             add(Stratum.builder.setBlockId("netherrack").build());
            }};
-        JsonOps.INSTANCE.withEncoder(Codec.list(Stratum.CODEC))
-                .apply(strata)
-                .mapError(StrataConfigGenerator::onError)
-                .result()
-                .ifPresent(jsonElement-> FilesUtil.saveJsonFile(StardustPaths.DataGen.DEFAULT_STRATA_FILE_GENERATION_PATH
+        JsonUtils.serializeToJson(strata, Codec.list(Stratum.CODEC))
+                .ifPresent(jsonElement->
+                        FilesUtils.saveJsonFile(StardustPaths.DataGen.DEFAULT_STRATA_FILE_GENERATION_PATH
                         ,jsonElement,hashCache));
-    }
-
-    private static String onError(String error) {
-        Stardust.LOGGER.error(error);
-        return error;
-    }
-
-    @Override
-    public String getName() {
-        return "Default Strata Generator";
     }
 }

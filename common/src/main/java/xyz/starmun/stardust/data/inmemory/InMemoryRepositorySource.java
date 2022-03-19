@@ -10,9 +10,8 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.repository.RepositorySource;
 import net.minecraft.tags.Tag;
 import org.jetbrains.annotations.Nullable;
-import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.constants.Constants;
-import xyz.starmun.stardust.utils.JsonUtil;
+import xyz.starmun.stardust.utils.JsonUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,7 +24,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class InMemoryRepositorySource implements RepositorySource {
     private static final Map<ResourceLocation, Set<ResourceLocation>> TAGS = new HashMap<>();
@@ -61,7 +59,7 @@ public class InMemoryRepositorySource implements RepositorySource {
         public void putJson(PackType type, ResourceLocation location, JsonElement json) {
             HashMap<ResourceLocation, Supplier<? extends InputStream>> map = getResourcePackTypeMap(type);
             if (map != null){
-                map.put(location, () -> new ByteArrayInputStream(JsonUtil.GSON.toJson(json).getBytes(StandardCharsets.UTF_8)));
+                map.put(location, () -> new ByteArrayInputStream(JsonUtils.GSON.toJson(json).getBytes(StandardCharsets.UTF_8)));
             }
         }
 

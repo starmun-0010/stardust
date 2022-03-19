@@ -6,8 +6,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.constants.StardustPaths;
 import xyz.starmun.stardust.datamodels.Stratum;
-import xyz.starmun.stardust.utils.FilesUtil;
-import xyz.starmun.stardust.utils.JsonUtil;
+import xyz.starmun.stardust.utils.FilesUtils;
+import xyz.starmun.stardust.utils.JsonUtils;
 
 import java.io.File;
 import java.io.Reader;
@@ -22,18 +22,18 @@ public class StrataRegistry {
             .build();
 
     public static void register(){
-       List<Path> filePaths = FilesUtil.crawlJsonFiles(Paths.get(StardustPaths.DEFAULT_STRATA_FILE_CONFIG_PATH));
+       List<Path> filePaths = FilesUtils.crawlJsonFiles(Paths.get(StardustPaths.DEFAULT_STRATA_FILE_CONFIG_PATH));
         if(filePaths == null){
             Stardust.LOGGER.error("Failed loading strata configuration files.");
             return;
         }
         filePaths.forEach(path -> {
-            Pair<File, Reader> pair = FilesUtil.loadFile(path);
+            Pair<File, Reader> pair = FilesUtils.loadFile(path);
             if(pair == null){
                 Stardust.LOGGER.error("Could not load strata configuration file.");
                 return;
             }
-            List<Stratum> strata =  JsonUtil.parseJson(pair.getRight(), Codec.list(Stratum.CODEC));
+            List<Stratum> strata =  JsonUtils.parseJson(pair.getRight(), Codec.list(Stratum.CODEC));
             if(strata==null){
                 Stardust.LOGGER.error("Error processing strata configuration file, failed to load strata.");
                 return;
