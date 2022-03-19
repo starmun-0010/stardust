@@ -33,7 +33,6 @@ public class Ore {
         return DataResult.success(items.stream().collect(Collectors.toMap(item->item.idSuffix, Function.identity())));
     }
 
-    public static Builder instance(){return new Builder();};
     private Ore(String id, List<String> colors, Map<String, Item> items){
         this.id = id;
         this.colors = colors;
@@ -58,6 +57,8 @@ public class Ore {
         private String id;
         private List<String> colors;
         private Map<String, Item>  itemModels = new HashMap<>();
+
+        public static Builder instance(){return new Builder();};
         public Builder setId(String id){
             this.id = id;
             return this;
@@ -79,7 +80,6 @@ public class Ore {
         private final String idSuffix;
         private final List<String> colors;
         private final RegistrationType registrationType;
-        public static Builder instance(){return new Builder();};
         public static final Codec<Item> CODEC = RecordCodecBuilder.create((instance)->
                 instance.group(
                         Codec.STRING.fieldOf("idSuffix").forGetter((Item item)-> item.idSuffix),
@@ -118,6 +118,7 @@ public class Ore {
             private String nameSuffix;
             private List<String> colors;
             private RegistrationType registrationType;
+            public static Builder instance(){return new Builder();};
 
             public Builder setNameSuffix(String nameSuffix){
                 this.nameSuffix = nameSuffix;

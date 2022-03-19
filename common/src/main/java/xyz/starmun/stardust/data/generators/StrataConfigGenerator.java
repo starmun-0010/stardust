@@ -21,15 +21,15 @@ public class StrataConfigGenerator implements DataProvider {
     @Override
     public void run(HashCache hashCache) {
         List<Stratum> strata = new ArrayList<Stratum>(){{
-            //vanilla strata[[[[[[[
-            add(Stratum.builder.setBlockId("stone").build());
-            add(Stratum.builder.setBlockId("gravel").build());
-            add(Stratum.builder.setBlockId("andesite").build());
-            add(Stratum.builder.setBlockId("diorite").build());
-            add(Stratum.builder.setBlockId("granite").build());
-            add(Stratum.builder.setBlockId("sandstone").build());
-            add(Stratum.builder.setBlockId("sand").build());
-            add(Stratum.builder.setBlockId("netherrack").build());
+            //vanilla strata
+            add(Stratum.Builder.instance().setBlockId("stone").build());
+            add(Stratum.Builder.instance().setBlockId("gravel").build());
+            add(Stratum.Builder.instance().setBlockId("andesite").build());
+            add(Stratum.Builder.instance().setBlockId("diorite").build());
+            add(Stratum.Builder.instance().setBlockId("granite").build());
+            add(Stratum.Builder.instance().setBlockId("sandstone").build());
+            add(Stratum.Builder.instance().setBlockId("sand").build());
+            add(Stratum.Builder.instance().setBlockId("netherrack").build());
            }};
         JsonUtils.serializeToJson(strata, Codec.list(Stratum.CODEC))
                 .ifPresent(jsonElement->

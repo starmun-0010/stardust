@@ -3,6 +3,7 @@ package xyz.starmun.stardust.registry;
 import org.apache.commons.lang3.tuple.Pair;
 import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.blocks.StateBasedOreBlock;
+import xyz.starmun.stardust.datamodels.DynamicItemModel;
 import xyz.starmun.stardust.datamodels.Properties;
 import xyz.starmun.stardust.datamodels.Ore;
 import xyz.starmun.stardust.item.StardustItem;
@@ -28,6 +29,10 @@ public class OreBlockRegistry {
         FilesUtils.crawlJsonFiles(PathExpectPlatform.getOresConfigPath())
                 .forEach((file)->{
                     Pair<File,Reader> pair = FilesUtils.loadFile(file);
+                    if(pair == null){
+                        Stardust.LOGGER.error("Could not load ore configuration file for "+file.toString());
+                        return;
+                    }
                     registerOre(JsonUtils.parseJson(pair.getRight(), Ore.CODEC));
                 });
         LOGGER.info("Loaded Custom Ores!");
@@ -44,15 +49,23 @@ public class OreBlockRegistry {
     private static void registerDynamicOreItems(String name,  Ore ore) {
         ItemDataModelRegistry.REGISTERED_ITEM_MODEL.forEach((s, dynamicItemModel) ->{
             StardustItem item = ItemRegistryExpectPlatform.register(name+"_"+dynamicItemModel.getName());
-            if(ore.getItems().containsKey(dynamicItemModel.getName())){
-                item.colors = ore.getItems().get(dynamicItemModel.getName()).getColor().toArray(new String[0]);
-            }
-            else {
-                item.colors = ore.getColors().toArray(new String[0]);
-            }
+            assignColors(ore, dynamicItemModel, item);
             item.name = dynamicItemModel.getName();
+
             REGISTERED_DYNAMIC_ITEMS.put(name+"_"+dynamicItemModel.getName(), item);
             ModelRegistryExpectPlatform.register(Stardust.MOD_ID+":"+"item/"+dynamicItemModel.getName());
         });
+    }
+
+    private static void assignColors(Ore ore, DynamicItemModel dynamicItemModel, StardustItem item) {
+        if(ore.getItems().containsKey(dynamicItemModel.getName())){
+            item.colors = ore.getItems().get(dynamicItemModel.getName()).getColor().toArray(new String[0]);
+        }
+        else if(ore.getColors()!=null){
+            item.colors = ore.getColors().toArray(new String[0]);
+        }
+        else if(dynamicItemModel.getColor()!=null){
+            item.colors = dynamicItemModel.getColor();
+        }
     }
 }

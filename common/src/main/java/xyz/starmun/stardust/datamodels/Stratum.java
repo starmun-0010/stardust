@@ -24,7 +24,7 @@ public class Stratum {
     private Supplier<Block> block;
     private Supplier<ResourceLocation> resourceLocation;
     private GenerationType generationType;
-    public static final Builder builder = new Builder();
+
     public static final Codec<Stratum> CODEC = RecordCodecBuilder.create((instance)->
         instance.group(
                 Codec.STRING.optionalFieldOf("modId").forGetter((Stratum stratum)-> Optional.ofNullable(stratum.modId)),
@@ -113,6 +113,9 @@ public class Stratum {
         private String baseTexture;
         private GenerationType generationType;
 
+        public static Builder instance(){
+            return new Builder();
+        }
         public Builder setModId(String modId) {
             this.modId = modId;
             return this;

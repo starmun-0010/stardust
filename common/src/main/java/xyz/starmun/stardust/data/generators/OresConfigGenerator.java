@@ -10,7 +10,7 @@ import xyz.starmun.stardust.utils.JsonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OreConfigGenerator implements DataProvider {
+public class OresConfigGenerator implements DataProvider {
 
     @Override
     public String getName() {
@@ -20,354 +20,354 @@ public class OreConfigGenerator implements DataProvider {
     @Override
     public void run(HashCache hashCache) {
         List<Ore> ores = new ArrayList<Ore>(){{
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("aluminum")
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("ore")
                             .setRegistrationType(Ore.Item.RegistrationType.BlockItem)
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("apatite")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("arcane")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("bitumen")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("brass")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("bronze")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("cast_iron")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("certus_quartz")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("charged_certus_quartz")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("cinnabar")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("cobalt")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("coke")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("constantan")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("copper")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("dimensional")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("electrum")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("enderium")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("fluix")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("fluorite")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("invar")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("iridium")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("iron")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("lead")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("lumium")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("nickel")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("osmium")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("peridot")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("potassium")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("ruby")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("saphire")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("signalum")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("silver")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("steel")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("sulfur")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("tin")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("uranium")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
 
-            add(Ore.instance()
+            add(Ore.Builder.instance()
                     .setId("zinc")
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Ore.Item.instance()
+                    .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());

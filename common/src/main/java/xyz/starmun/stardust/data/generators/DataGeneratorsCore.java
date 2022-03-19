@@ -7,7 +7,7 @@ public class DataGeneratorsCore {
     public static void register(DataGenerator dataGenerator){
         DataGeneratorsCore.dataGenerator = dataGenerator;
         DataGeneratorsCore.dataGenerator.addProvider(new StrataConfigGenerator());
-        DataGeneratorsCore.dataGenerator.addProvider(new OreConfigGenerator());
+        DataGeneratorsCore.dataGenerator.addProvider(new OresConfigGenerator());
 
 
     }
