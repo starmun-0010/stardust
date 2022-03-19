@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import org.apache.commons.lang3.tuple.Pair;
-import xyz.starmun.stardust.data.generators.DataProviderBase;
+import xyz.starmun.stardust.data.generators.DataGeneratorsCore;
 import xyz.starmun.stardust.platform.contracts.PathExpectPlatform;
 
 import java.io.File;
@@ -25,14 +25,14 @@ public final class FilesUtil{
     private FilesUtil(){
 
     }
-    public static final String JSON = ".json";
+    public static final String JSON_FILE_EXTENSION = ".json";
     public static Path getStardustModJarResourcesPath(){
         return PathExpectPlatform.getStardustModJarResourcesPath();
     }
     public static Path getIntellijProjectRootPath(){ return Paths.get(".").normalize().toAbsolutePath().getParent().toAbsolutePath(); }
     public static List<Path> crawlJsonFiles(Path directory){
         try (Stream<Path> stream = Files.find(directory,Integer.MAX_VALUE,(path,attributes) ->
-                attributes.isRegularFile() && path.toString().toLowerCase(Locale.ROOT).endsWith(JSON))) {
+                attributes.isRegularFile() && path.toString().toLowerCase(Locale.ROOT).endsWith(JSON_FILE_EXTENSION))) {
             return stream.collect(Collectors.toList());
         } catch (IOException e) {
             LOGGER.error("Files crawl failed.", e);
@@ -54,8 +54,8 @@ public final class FilesUtil{
             DataProvider.save(new GsonBuilder().setPrettyPrinting().create(),
                     hashCache,
                     jsonElement,
-                    Paths.get(DataProviderBase.dataGenerator.getOutputFolder().toString(),
-                          path + FilesUtil.JSON));
+                    Paths.get(DataGeneratorsCore.dataGenerator.getOutputFolder().toString(),
+                          path + FilesUtil.JSON_FILE_EXTENSION));
         } catch (IOException e) {
             e.printStackTrace();
         }

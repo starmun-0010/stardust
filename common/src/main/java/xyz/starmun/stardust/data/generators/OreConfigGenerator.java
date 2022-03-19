@@ -1,6 +1,7 @@
 package xyz.starmun.stardust.data.generators;
 
 import com.mojang.serialization.JsonOps;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.constants.StardustPaths;
@@ -10,7 +11,7 @@ import xyz.starmun.stardust.utils.FilesUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OreConfigGenerator extends DataProviderBase {
+public class OreConfigGenerator implements DataProvider {
 
     @Override
     public void run(HashCache hashCache) {

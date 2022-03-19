@@ -3,10 +3,12 @@ package xyz.starmun.stardust.data.generators;
 import net.minecraft.data.DataGenerator;
 
 public class DataGeneratorsCore {
-
+    public  static DataGenerator dataGenerator = null;
     public static void register(DataGenerator dataGenerator){
-        DataProviderBase.dataGenerator = dataGenerator;
-        DataProviderBase.dataGenerator.addProvider(new StrataConfigGenerator());
-        DataProviderBase.dataGenerator.addProvider(new OreConfigGenerator());
+        DataGeneratorsCore.dataGenerator = dataGenerator;
+        DataGeneratorsCore.dataGenerator.addProvider(new StrataConfigGenerator());
+        DataGeneratorsCore.dataGenerator.addProvider(new OreConfigGenerator());
+
+
     }
 }
