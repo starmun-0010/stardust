@@ -31,15 +31,15 @@ public class StrataConfigGenerator extends DataProviderBase {
     @Override
     public void run(HashCache hashCache) {
         List<Stratum> strata = new ArrayList<Stratum>(){{
-            add(new Stratum("stone","minecraft","minecraft:block/stone"));
-            add(new Stratum("gravel","minecraft","minecraft:block/gravel"));
-            add(new Stratum("andesite","minecraft","minecraft:block/andesite"));
-            add(new Stratum("diorite","minecraft","minecraft:block/diorite"));
-            add(new Stratum("granite","minecraft","minecraft:block/granite"));
-            add(new Stratum("sandstone","minecraft","minecraft:block/sandstone"));
-            add(new Stratum("sand","minecraft","minecraft:block/sand"));
-            add(new Stratum("netherrack","minecraft","minecraft:block/netherrack", Stratum.GenerationType.Block));
-        }};
+            add(Stratum.builder.setBlockId("stone").build());
+            add(Stratum.builder.setBlockId("gravel").build());
+            add(Stratum.builder.setBlockId("andesite").build());
+            add(Stratum.builder.setBlockId("diorite").build());
+            add(Stratum.builder.setBlockId("granite").build());
+            add(Stratum.builder.setBlockId("sandstone").build());
+            add(Stratum.builder.setBlockId("sand").build());
+            add(Stratum.builder.setBlockId("netherrack").build());
+           }};
         JsonOps.INSTANCE.withEncoder(Codec.list(Stratum.CODEC))
                 .apply(strata)
                 .mapError(StrataConfigGenerator::onError)
@@ -54,6 +54,6 @@ public class StrataConfigGenerator extends DataProviderBase {
 
     @Override
     public String getName() {
-        return "Default Strata";
+        return "Default Strata Generator";
     }
 }

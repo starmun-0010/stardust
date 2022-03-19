@@ -1,43 +1,26 @@
 [
   {
-    "modId": "minecraft",
-    "blockId": "stone",
-    "baseTexture": "minecraft:block/stone"
+    "blockId": "stone"
   },
   {
-    "modId": "minecraft",
-    "blockId": "gravel",
-    "baseTexture": "minecraft:block/gravel"
+    "blockId": "gravel"
   },
   {
-    "modId": "minecraft",
-    "blockId": "andesite",
-    "baseTexture": "minecraft:block/andesite"
+    "blockId": "andesite"
   },
   {
-    "modId": "minecraft",
-    "blockId": "diorite",
-    "baseTexture": "minecraft:block/diorite"
+    "blockId": "diorite"
   },
   {
-    "modId": "minecraft",
-    "blockId": "granite",
-    "baseTexture": "minecraft:block/granite"
+    "blockId": "granite"
   },
   {
-    "modId": "minecraft",
-    "blockId": "sandstone",
-    "baseTexture": "minecraft:block/sandstone"
+    "blockId": "sandstone"
   },
   {
-    "modId": "minecraft",
-    "blockId": "sand",
-    "baseTexture": "minecraft:block/sand"
+    "blockId": "sand"
   },
   {
-    "modId": "minecraft",
-    "blockId": "netherrack",
-    "baseTexture": "minecraft:block/netherrack",
-    "generationType": "Block"
+    "blockId": "netherrack"
   }
 ]

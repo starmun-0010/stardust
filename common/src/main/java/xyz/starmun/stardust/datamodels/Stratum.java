@@ -19,26 +19,25 @@ public class Stratum {
     private String id;
     private String modId;
     private String blockId;
-    private boolean isEnabled;
+    private Boolean isEnabled;
     private String baseTexture;
     private Supplier<Block> block;
     private Supplier<ResourceLocation> resourceLocation;
     private GenerationType generationType;
-
+    public static final Builder builder = new Builder();
     public static final Codec<Stratum> CODEC = RecordCodecBuilder.create((instance)->
         instance.group(
-
-                Codec.STRING.fieldOf("modId").forGetter((Stratum stratum)-> stratum.modId),
+                Codec.STRING.optionalFieldOf("modId").forGetter((Stratum stratum)-> Optional.ofNullable(stratum.modId)),
                 Codec.STRING.fieldOf("blockId").forGetter((Stratum stratum)-> stratum.blockId),
-                Codec.STRING.fieldOf("baseTexture").forGetter((Stratum stratum)-> stratum.baseTexture),
-                Codec.BOOL.fieldOf("isEnabled").orElse(true).forGetter((Stratum stratum)-> stratum.isEnabled),
+                Codec.STRING.optionalFieldOf("baseTexture").forGetter((Stratum stratum)-> Optional.ofNullable(stratum.baseTexture)),
+                Codec.BOOL.optionalFieldOf("isEnabled").forGetter((Stratum stratum)-> Optional.ofNullable(stratum.isEnabled)),
                 Codec.STRING.flatXmap(Stratum::toGenerationType, Stratum::fromGenerationType)
-                        .fieldOf("generationType")
-                        .orElse(GenerationType.BlockState)
-                        .forGetter((Stratum generationType) -> generationType.generationType))
+                        .optionalFieldOf("generationType")
+                        .forGetter((Stratum generationType) -> Optional.ofNullable(generationType.generationType)))
                 .apply(instance, (modId,blockId,baseTexture,isEnabled, generationType)->
-                        new Stratum(blockId, modId, baseTexture,isEnabled, generationType))
+                        new Stratum(blockId, modId.orElse("minecraft"), baseTexture.orElse(modId.orElse("minecraft") + ":block/" + blockId), isEnabled.orElse(true), generationType.orElse(GenerationType.BlockState)))
     );
+
 
     private static DataResult<GenerationType> toGenerationType(String type) {
         if(type != null && Enums.getIfPresent(GenerationType.class,type).isPresent()){
@@ -59,29 +58,22 @@ public class Stratum {
         return DataResult.success(generationType.name());
     }
 
-    public Stratum(String blockId, String modId, String baseTexture, boolean isEnabled, GenerationType generationType){
-        this(blockId,modId,baseTexture);
-        this.generationType = generationType;
-        this.isEnabled = isEnabled;
-    }
-    public Stratum(String blockId, String modId, String baseTexture, GenerationType generationType){
-        this(blockId,modId,baseTexture);
-        this.generationType = generationType;
-    }
-    public Stratum(String blockId, String modId, String baseTexture){
+    private Stratum(String blockId, String modId, String baseTexture, Boolean isEnabled, GenerationType generationType){
         this.blockId = blockId;
         this.modId = modId;
         this.id =  modId +"_"+ blockId;
         this.baseTexture = baseTexture;
         this.resourceLocation = ()-> new ResourceLocation(modId, blockId);
         this.block = () -> Registry.BLOCK.containsKey(resourceLocation.get()) ? Registry.BLOCK.get(resourceLocation.get()) : null;
+        this.generationType = generationType;
+        this.isEnabled = isEnabled;
     }
 
     public GenerationType getGenerationType() {
         return generationType;
     }
 
-    public boolean isEnabled() {
+    public Boolean isEnabled() {
         return isEnabled;
     }
 
@@ -112,5 +104,48 @@ public class Stratum {
     public enum GenerationType{
         Block,
         BlockState
+    }
+    public static class Builder{
+
+        private String modId;
+        private String blockId;
+        private Boolean isEnabled;
+        private String baseTexture;
+        private GenerationType generationType;
+
+        public Builder setModId(String modId) {
+            this.modId = modId;
+            return this;
+        }
+
+        public Builder setBlockId(String blockId) {
+            this.blockId = blockId;
+            return this;
+        }
+
+        public Builder setEnabled(Boolean enabled) {
+            isEnabled = enabled;
+            return this;
+        }
+
+    private static Optional<String> eee() {
+        return null;
+    }
+
+    private static Optional<String> ff() {
+        return null;
+    }
+        public Builder setBaseTexture(String baseTexture) {
+            this.baseTexture = baseTexture;
+            return this;
+        }
+
+        public Builder setGenerationType(GenerationType generationType) {
+            this.generationType = generationType;
+            return this;
+        }
+        public Stratum build(){
+            return new Stratum(this.blockId,this.modId,this.baseTexture,this.isEnabled,this.generationType);
+        }
     }
 }

@@ -495,6 +495,6 @@ public class OreConfigGenerator extends DataProviderBase {
 
     @Override
     public String getName() {
-        return "Default Ores";
+        return "Default Ores Generator";
     }
 }
