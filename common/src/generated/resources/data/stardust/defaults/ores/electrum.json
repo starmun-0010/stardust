@@ -5,10 +5,7 @@
   ],
   "items": [
     {
-      "idSuffix": "gear",
-      "colors": [
-        ""
-      ]
+      "idSuffix": "gear"
     }
   ]
 }

@@ -8,7 +8,6 @@ public class DataGeneratorsCore {
         DataGeneratorsCore.dataGenerator = dataGenerator;
         DataGeneratorsCore.dataGenerator.addProvider(new StrataConfigGenerator());
         DataGeneratorsCore.dataGenerator.addProvider(new OresConfigGenerator());
-
-
+        DataGeneratorsCore.dataGenerator.addProvider(new ItemsConfigGenerator());
     }
 }

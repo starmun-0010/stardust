@@ -11,6 +11,7 @@ public final class StardustPaths {
 public final class DataGen{
     public static final String DEFAULT_STRATA_FILE_GENERATION_PATH = "/data/stardust/defaults/strata/strata";
     public static final String DEFAULT_ORE_FILES_GENERATION_PATH = "/data/stardust/defaults/ores/";
+    public static final String DEFAULT_ITEMS_FILES_GENERATION_PATH = "/data/stardust/defaults/items/";
 
 }
     private StardustPaths(){}

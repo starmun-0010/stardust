@@ -373,8 +373,7 @@ public class OresConfigGenerator implements DataProvider {
                     .build());
         }};
         ores.forEach(ore -> {
-            JsonUtils.serializeToJson(ore, Ore.CODEC)
-                    .ifPresent(jsonElement->
+            JsonUtils.serializeToJson(ore, Ore.CODEC).ifPresent(jsonElement->
                     FilesUtils.saveJsonFile(StardustPaths.DataGen.DEFAULT_ORE_FILES_GENERATION_PATH
                             + ore.getId(), jsonElement, hashCache));
         });

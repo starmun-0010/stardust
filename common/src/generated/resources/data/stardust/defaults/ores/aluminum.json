@@ -3,16 +3,10 @@
   "items": [
     {
       "idSuffix": "ore",
-      "colors": [
-        ""
-      ],
       "generationType": "BlockItem"
     },
     {
-      "idSuffix": "gear",
-      "colors": [
-        ""
-      ]
+      "idSuffix": "gear"
     }
   ]
 }
