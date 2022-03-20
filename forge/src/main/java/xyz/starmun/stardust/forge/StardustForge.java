@@ -6,7 +6,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -88,4 +91,12 @@ public class StardustForge {
                     layer -> layer == RenderType.cutout());
         }
     }
+    public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(Stardust.MOD_ID)
+    {
+        @Override
+        public ItemStack makeIcon()
+        {
+            return new ItemStack(Items.REDSTONE);
+        }
+    };
 }
