@@ -1,19 +1,24 @@
 package xyz.starmun.stardust.blocks;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.storage.loot.LootContext;
 import xyz.starmun.stardust.registry.StrataRegistry;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class StateBasedOreBlock extends OreBlock {
+    public boolean dropSelf = false;
     public static class StringProperty extends Property<String>{
         protected final ImmutableMap<String,String> values;
         public StringProperty(String name) {
@@ -63,6 +68,14 @@ public class StateBasedOreBlock extends OreBlock {
                         .setValue(STRATUM, "minecraft_stone")
             );
         }
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState blockState, LootContext.Builder builder) {
+        List<ItemStack> drops = super.getDrops(blockState, builder);
+        if(!dropSelf)return drops;
+        drops.add(this.asItem().getDefaultInstance());
+        return drops;
     }
 
     @Override

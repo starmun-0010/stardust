@@ -3,7 +3,8 @@
   "package": "xyz.starmun.stardust.forge.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "DataMixin"
+    "DataMixin",
+    "MinecraftServerMixin"
   ],
   "minVersion": "0.8"
 }

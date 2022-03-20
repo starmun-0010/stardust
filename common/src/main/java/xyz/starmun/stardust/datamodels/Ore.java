@@ -76,23 +76,26 @@ public class Ore {
     public static class Item {
         private final String idSuffix;
         private final List<String> colors;
+        private Boolean dropSelf;
         private final RegistrationType registrationType;
         public static final Codec<Item> CODEC = RecordCodecBuilder.create((instance)->
                 instance.group(
                         Codec.STRING.fieldOf("idSuffix").forGetter((Item item)-> item.idSuffix),
+                        Codec.BOOL.optionalFieldOf("dropSelf").forGetter((Item item)-> Optional.ofNullable(item.dropSelf)),
                         Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Item item)-> Optional.ofNullable(item.colors)),
                         Codec.STRING.xmap(value-> EnumUtils.fromStringToEnum(RegistrationType.class,value),
                                 EnumUtils::fromEnumToString)
                                 .optionalFieldOf("generationType")
                                 .forGetter((Item item) -> (Optional.ofNullable(item.registrationType))))
-                        .apply(instance, (id,colors,registrationType)->
-                                new Item(id,colors.orElse(new ArrayList<>()),registrationType.orElse(RegistrationType.Item)))
+                        .apply(instance, (id,dropSelf,colors,registrationType)->
+                                new Item(id,dropSelf.orElse(false),colors.orElse(new ArrayList<>()),registrationType.orElse(RegistrationType.Item)))
 
         );
 
-        private Item(String idSuffix, List<String> colors, RegistrationType registrationType){
+        private Item(String idSuffix, Boolean dropSelf,List<String> colors, RegistrationType registrationType){
             this.idSuffix = idSuffix;
             this.registrationType = registrationType;
+            this.dropSelf = dropSelf;
             this.colors = colors;
         }
 
@@ -103,15 +106,20 @@ public class Ore {
             return idSuffix;
         }
 
+        public Boolean getDropSelf() {
+            return dropSelf;
+        }
 
         public RegistrationType getRegistrationType() {
             return registrationType;
         }
 
+
         public static class Builder{
             private String nameSuffix;
             private List<String> colors;
             private RegistrationType registrationType;
+            private Boolean dropSelf;
             public static Builder instance(){return new Builder();};
 
             public Builder setNameSuffix(String nameSuffix){
@@ -126,10 +134,15 @@ public class Ore {
                 this.registrationType = registrationType;
                 return this;
             }
+            public Builder setDropSelf(Boolean dropSelf) {
+                this.dropSelf = dropSelf;
+                return this;
+            }
 
             public Item build(){
-                return new Item(this.nameSuffix, this.colors, this.registrationType);
+                return new Item(this.nameSuffix,this.dropSelf, this.colors, this.registrationType);
             }
+
         }
         public enum RegistrationType {
             Item,

@@ -3,6 +3,7 @@
   "items": [
     {
       "idSuffix": "ore",
+      "dropSelf": true,
       "generationType": "BlockItem"
     },
     {

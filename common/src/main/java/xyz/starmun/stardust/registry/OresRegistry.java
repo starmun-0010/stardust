@@ -47,6 +47,7 @@ public class OresRegistry {
                 StateBasedOreBlock block = (StateBasedOreBlock) BlockRegistryExpectPlatform.register(new Properties(ore.getId()));
                 REGISTERED_ORE_BLOCKS.put(ore.getId(), block);
                 if(dynamicItem.getRegistrationType()== Ore.Item.RegistrationType.BlockItem){
+                    block.dropSelf = dynamicItem.getDropSelf();
                     REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(ore.getId(), block));
                 }
             }

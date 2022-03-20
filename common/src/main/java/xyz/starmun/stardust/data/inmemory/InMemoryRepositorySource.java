@@ -1,6 +1,9 @@
 package xyz.starmun.stardust.data.inmemory;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
@@ -14,30 +17,28 @@ import xyz.starmun.stardust.constants.Constants;
 import xyz.starmun.stardust.utils.JsonUtils;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class InMemoryRepositorySource implements RepositorySource {
     private static final Map<ResourceLocation, Set<ResourceLocation>> TAGS = new HashMap<>();
+    public static final InMemoryRepositorySource INSTANCE = new InMemoryRepositorySource();
 
     @Override
     public void loadPacks(Consumer<Pack> consumer, Pack.PackConstructor packConstructor) {
-
-
         try (InMemoryPackResource dataPack = new InMemoryPackResource()) {
-            TAGS.forEach((location, resourceLocations) -> {
-                Tag.Builder builder = Tag.Builder.tag();
-                resourceLocations.forEach(t -> builder.addElement(t, Constants.IN_MEMORY_DATA_PACK_NAME));
-                dataPack.putJson(PackType.SERVER_DATA, location, builder.serializeToJson());
-            });
+//            TAGS.forEach((location, resourceLocations) -> {
+//                Tag.Builder builder = Tag.Builder.tag();
+//                resourceLocations.forEach(t -> builder.addElement(t, Constants.IN_MEMORY_DATA_PACK_NAME));
+               // dataPack.putJson(PackType.SERVER_DATA, new ResourceLocation(""), new JsonParser().parse(""));
+           // });
 
             Pack pack = Pack.create(
                     Constants.IN_MEMORY_DATA_PACK_NAME,
@@ -51,9 +52,21 @@ public class InMemoryRepositorySource implements RepositorySource {
         }
     }
     private static class InMemoryPackResource implements PackResources{
+
+        private static final JsonObject meta = new JsonObject();
+        static {
+            meta.add("pack_format", new JsonPrimitive(4));
+            meta.add("description", new JsonPrimitive("Data for stardust."));
+        }
+
+        private final HashMap<ResourceLocation, Supplier<? extends InputStream>> assets = new HashMap<>();
+        private final HashMap<ResourceLocation, Supplier<? extends InputStream>> data = new HashMap<>();
+
         @Nullable
         private HashMap<ResourceLocation, Supplier<? extends InputStream>> getResourcePackTypeMap(PackType type){
-         return null;
+            if (type.equals(PackType.CLIENT_RESOURCES)) return assets;
+            else if (type.equals(PackType.SERVER_DATA)) return data;
+            else return null;
         }
 
         public void putJson(PackType type, ResourceLocation location, JsonElement json) {
@@ -64,39 +77,54 @@ public class InMemoryRepositorySource implements RepositorySource {
         }
 
         @Override
-        public InputStream getRootResource(String string) throws IOException {
-            return null;
+        public InputStream getRootResource(String file) throws IOException {
+            if(file.contains("/") || file.contains("\\")) {
+                throw new IllegalArgumentException("Root resources can only be filenames, not paths (no / allowed!)");
+            }
+            throw new FileNotFoundException(file);        }
+
+        @Override
+        public InputStream getResource(PackType type, ResourceLocation location) throws IOException {
+            Map<ResourceLocation, Supplier<? extends InputStream>> map = getResourcePackTypeMap(type);
+            if(map != null && map.containsKey(location)) {
+                return map.get(location).get();
+            }
+            throw new FileNotFoundException(location.toString());        }
+
+        @Override
+        public Collection<ResourceLocation> getResources(PackType type, String namespace, String path, int maxFolderWalk, Predicate<String> predicate) {
+            Map<ResourceLocation, Supplier<? extends InputStream>> map = getResourcePackTypeMap(type);
+            if (map == null) return Collections.emptyList();
+
+            return map.keySet().stream()
+                    .filter(location->location.getNamespace().equals(namespace))
+                    .filter(location->location.getPath().split("/").length < maxFolderWalk)
+                    .filter(location->location.getPath().startsWith(path))
+                    .filter(location-> predicate.test(location.getPath().substring(Math.max(location.getPath().lastIndexOf('/'), 0)))
+                    ).collect(Collectors.toList());        }
+
+        @Override
+        public boolean hasResource(PackType type, ResourceLocation location) {
+            Map<ResourceLocation, Supplier<? extends InputStream>> map = getResourcePackTypeMap(type);
+            return map != null && map.containsKey(location);
         }
 
         @Override
-        public InputStream getResource(PackType packType, ResourceLocation resourceLocation) throws IOException {
-            return null;
-        }
-
-        @Override
-        public Collection<ResourceLocation> getResources(PackType packType, String string, String string2, int i, Predicate<String> predicate) {
-            return null;
-        }
-
-        @Override
-        public boolean hasResource(PackType packType, ResourceLocation resourceLocation) {
-            return false;
-        }
-
-        @Override
-        public Set<String> getNamespaces(PackType packType) {
-            return null;
+        public Set<String> getNamespaces(PackType type) {
+            Map<ResourceLocation, Supplier<? extends InputStream>> map = getResourcePackTypeMap(type);
+            if (map == null) return Collections.emptySet();
+            return map.keySet().stream().map(ResourceLocation::getNamespace).collect(Collectors.toSet());
         }
 
         @Nullable
         @Override
-        public <T> T getMetadataSection(MetadataSectionSerializer<T> metadataSectionSerializer) throws IOException {
-            return null;
+        public <T> T getMetadataSection(MetadataSectionSerializer<T> serializer) throws IOException {
+            return serializer.fromJson(meta);
         }
 
         @Override
         public String getName() {
-            return null;
+            return Constants.IN_MEMORY_DATA_PACK_NAME;
         }
 
         @Override
