@@ -1,6 +1,5 @@
 package xyz.starmun.stardust.data.generators;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import xyz.starmun.stardust.constants.StardustPaths;

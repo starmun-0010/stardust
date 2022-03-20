@@ -42,9 +42,6 @@ public class Ore {
     public String getId() {
         return id;
     }
-    public List<String> getColor() {
-        return colors;
-    }
     public  Map<String, Item>  getItems() {
         return items;
     }
@@ -99,16 +96,13 @@ public class Ore {
             this.colors = colors;
         }
 
-        public List<String> getColor() {
+        public List<String> getColors() {
             return colors;
         }
         public String getIdSuffix() {
             return idSuffix;
         }
 
-        public List<String> getColors() {
-            return colors;
-        }
 
         public RegistrationType getRegistrationType() {
             return registrationType;

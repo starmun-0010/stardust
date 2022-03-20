@@ -3,9 +3,8 @@ package xyz.starmun.stardust.registry;
 import org.apache.commons.lang3.tuple.Pair;
 import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.blocks.StateBasedOreBlock;
-import xyz.starmun.stardust.datamodels.DynamicItemModel;
-import xyz.starmun.stardust.datamodels.Properties;
 import xyz.starmun.stardust.datamodels.Ore;
+import xyz.starmun.stardust.datamodels.Properties;
 import xyz.starmun.stardust.item.StardustItem;
 import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ItemRegistryExpectPlatform;
@@ -16,11 +15,14 @@ import xyz.starmun.stardust.utils.JsonUtils;
 
 import java.io.File;
 import java.io.Reader;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
-public class OreBlockRegistry {
+public class OresRegistry {
     public static final HashMap<String, StateBasedOreBlock> REGISTERED_ORE_BLOCKS = new HashMap<>();
     public static final Set<net.minecraft.world.item.Item> REGISTERED_ORE_ITEMS = new HashSet<>();
     public static final Map<String, StardustItem> REGISTERED_DYNAMIC_ITEMS = new HashMap<>();
@@ -33,39 +35,39 @@ public class OreBlockRegistry {
                         Stardust.LOGGER.error("Could not load ore configuration file for "+file.toString());
                         return;
                     }
-                    registerOre(JsonUtils.parseJson(pair.getRight(), Ore.CODEC));
+                    registerDynamicOreItems(JsonUtils.parseJson(pair.getRight(), Ore.CODEC));
                 });
         LOGGER.info("Loaded Custom Ores!");
         return REGISTERED_ORE_BLOCKS;
-    } 
-
-    private static <T> void registerOre(Ore ore) {
-        StateBasedOreBlock block = (StateBasedOreBlock) BlockRegistryExpectPlatform.register(new Properties(ore.getId()));
-        REGISTERED_ORE_BLOCKS.put(ore.getId(), block);
-        REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(ore.getId(), block));
-        registerDynamicOreItems(ore.getId(),ore);
     }
 
-    private static void registerDynamicOreItems(String name,  Ore ore) {
-        ItemDataModelRegistry.REGISTERED_ITEM_MODEL.forEach((s, dynamicItemModel) ->{
-            StardustItem item = ItemRegistryExpectPlatform.register(name+"_"+dynamicItemModel.getName());
-            assignColors(ore, dynamicItemModel, item);
-            item.name = dynamicItemModel.getName();
-
-            REGISTERED_DYNAMIC_ITEMS.put(name+"_"+dynamicItemModel.getName(), item);
-            ModelRegistryExpectPlatform.register(Stardust.MOD_ID+":"+"item/"+dynamicItemModel.getName());
+    private static void registerDynamicOreItems(Ore ore) {
+        ItemsRegistry.REGISTERED_ITEM_MODEL.forEach((s, dynamicItem) ->{
+            if(dynamicItem.getRegistrationType() != Ore.Item.RegistrationType.Item){
+                StateBasedOreBlock block = (StateBasedOreBlock) BlockRegistryExpectPlatform.register(new Properties(ore.getId()));
+                REGISTERED_ORE_BLOCKS.put(ore.getId(), block);
+                if(dynamicItem.getRegistrationType()== Ore.Item.RegistrationType.BlockItem){
+                    REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(ore.getId(), block));
+                }
+            }
+           else {
+                StardustItem item = ItemRegistryExpectPlatform.register(ore.getId()+"_"+dynamicItem.getIdSuffix());
+                assignColors(ore, dynamicItem, item);
+                REGISTERED_DYNAMIC_ITEMS.put(ore.getId()+"_"+dynamicItem.getIdSuffix(), item);
+                ModelRegistryExpectPlatform.register(Stardust.MOD_ID+":"+"item/"+dynamicItem.getIdSuffix());
+            }
         });
     }
 
-    private static void assignColors(Ore ore, DynamicItemModel dynamicItemModel, StardustItem item) {
-        if(ore.getItems().containsKey(dynamicItemModel.getName())){
-            item.colors = ore.getItems().get(dynamicItemModel.getName()).getColor().toArray(new String[0]);
+    private static void assignColors(Ore ore, Ore.Item dynamicItemModel, StardustItem item) {
+        if(ore.getItems().containsKey(dynamicItemModel.getIdSuffix())){
+            item.colors = ore.getItems().get(dynamicItemModel.getIdSuffix()).getColors().toArray(new String[0]);
         }
         else if(ore.getColors()!=null){
             item.colors = ore.getColors().toArray(new String[0]);
         }
-        else if(dynamicItemModel.getColor()!=null){
-            item.colors = dynamicItemModel.getColor();
+        else if(dynamicItemModel.getColors()!=null){
+            item.colors = dynamicItemModel.getColors().toArray(new String[0]);
         }
     }
 }
