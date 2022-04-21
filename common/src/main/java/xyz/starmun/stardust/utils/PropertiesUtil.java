@@ -5,7 +5,7 @@ import xyz.starmun.stardust.datamodels.Properties;
 
 public class PropertiesUtil {
     public static Properties assignProperties(Ore ore, Ore.Item item) {
-        Properties properties =new Properties(ore.getId()){{
+        Properties properties =new Properties(ore.getId()+"_"+item.getIdSuffix()){{
 
         }};
         if(item.getGenerateInWorld()){
