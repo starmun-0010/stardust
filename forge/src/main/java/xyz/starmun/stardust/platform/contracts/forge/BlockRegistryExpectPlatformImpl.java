@@ -9,14 +9,21 @@ import xyz.starmun.stardust.datamodels.Properties;
 import static xyz.starmun.stardust.forge.StardustForge.BLOCKS;
 
 public class BlockRegistryExpectPlatformImpl {
-    public static Block register(Properties properties){
+    public static Block register(Properties props){
 
         Block block = new StateBasedOreBlock(Block.Properties.of(Material.STONE)
                 .strength(3.0f,3.0f)
                 .harvestLevel(1)
                 .harvestTool(ToolType.PICKAXE)
-                .requiresCorrectToolForDrops());
-        BLOCKS.register(properties.name, () -> block);
+                .requiresCorrectToolForDrops()){{
+                    maximum = props.maximum;
+                    bottomOffset = props.bottomOffset;
+                    topOffset = props.topOffset;
+                    maxVeinSize = props.maxVeinSize;
+                    maxPerChunk = props.maxPerChunk;
+        }};
+
+        BLOCKS.register(props.name, () -> block);
         return block;
     }
 }

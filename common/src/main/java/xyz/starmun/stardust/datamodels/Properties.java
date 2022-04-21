@@ -5,4 +5,16 @@ public class Properties {
     public Properties(String name){
         this.name = name;
     }
+    public double strength;
+    public int harvestLevel;
+    public ToolType toolType;
+    public boolean toolRequired;
+
+    ///TODO::Refactor to single set for each ore
+
+    public int bottomOffset;
+    public int topOffset;
+    public int maximum;
+    public int maxVeinSize;
+    public int maxPerChunk;
 }

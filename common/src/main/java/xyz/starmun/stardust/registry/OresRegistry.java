@@ -10,8 +10,10 @@ import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ItemRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.ModelRegistryExpectPlatform;
 import xyz.starmun.stardust.platform.contracts.PathExpectPlatform;
+import xyz.starmun.stardust.utils.ColorsUtil;
 import xyz.starmun.stardust.utils.FilesUtils;
 import xyz.starmun.stardust.utils.JsonUtils;
+import xyz.starmun.stardust.utils.PropertiesUtil;
 
 import java.io.File;
 import java.io.Reader;
@@ -42,33 +44,26 @@ public class OresRegistry {
     }
 
     private static void registerDynamicOreItems(Ore ore) {
-        ItemsRegistry.REGISTERED_ITEM_MODEL.forEach((s, dynamicItem) ->{
+            ore.getItems().forEach((s, dynamicItem) ->{
             if(dynamicItem.getRegistrationType() != Ore.Item.RegistrationType.Item){
-                StateBasedOreBlock block = (StateBasedOreBlock) BlockRegistryExpectPlatform.register(new Properties(ore.getId()));
+                Properties properties = PropertiesUtil.assignProperties(ore, dynamicItem);
+                StateBasedOreBlock block = (StateBasedOreBlock) BlockRegistryExpectPlatform.register(properties);
                 REGISTERED_ORE_BLOCKS.put(ore.getId(), block);
                 if(dynamicItem.getRegistrationType()== Ore.Item.RegistrationType.BlockItem){
                     block.dropSelf = dynamicItem.getDropSelf();
                     REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(ore.getId(), block));
                 }
-            }
+           }
            else {
                 StardustItem item = ItemRegistryExpectPlatform.register(ore.getId()+"_"+dynamicItem.getIdSuffix());
-                assignColors(ore, dynamicItem, item);
+                ColorsUtil.assignColors(ore, dynamicItem, item);
                 REGISTERED_DYNAMIC_ITEMS.put(ore.getId()+"_"+dynamicItem.getIdSuffix(), item);
                 ModelRegistryExpectPlatform.register(Stardust.MOD_ID+":"+"item/"+dynamicItem.getIdSuffix());
             }
         });
     }
 
-    private static void assignColors(Ore ore, Ore.Item dynamicItemModel, StardustItem item) {
-        if(ore.getItems().containsKey(dynamicItemModel.getIdSuffix())){
-            item.colors = ore.getItems().get(dynamicItemModel.getIdSuffix()).getColors().toArray(new String[0]);
-        }
-        else if(ore.getColors()!=null){
-            item.colors = ore.getColors().toArray(new String[0]);
-        }
-        else if(dynamicItemModel.getColors()!=null){
-            item.colors = dynamicItemModel.getColors().toArray(new String[0]);
-        }
-    }
+
+
+
 }

@@ -30,6 +30,11 @@ public class OresConfigGenerator implements DataProvider {
                             .setGenerateInWorld(true)
                             .setDropSelf(true)
                             .setRegistrationType(Ore.Item.RegistrationType.BlockItem)
+                            .setBottomOffset(3)
+                            .setTopOffset(3)
+                            .setMaximum(225)
+                            .setMaxVeinSize(16)
+                            .setMaxPerChunk(64)
                             .build())
                     .build());
             add(Ore.Builder.instance()
