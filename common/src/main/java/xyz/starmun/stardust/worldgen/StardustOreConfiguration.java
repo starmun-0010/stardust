@@ -14,8 +14,12 @@ public class StardustOreConfiguration {
         return Feature.ORE.configured(new OreConfiguration(
                 new BlockMatchTest(stratum.getBlock().get()),
                 block.getStateDefinition().any().setValue(StateBasedOreBlock.STRATUM, stratum.getId())
-                , 16))
-                .decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(3, 3, 222))).squared()
-                .count(64);
+                , block.maxVeinSize))
+                .decorated(FeatureDecorator.RANGE.configured(
+                        new RangeDecoratorConfiguration(
+                                block.bottomOffset,
+                                block.topOffset,
+                                block.maximum))).squared()
+                .count(block.maxPerChunk);
     }
 }

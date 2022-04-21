@@ -26,7 +26,14 @@ public class ItemsConfigGenerator implements DataProvider {
             add(Ore.Item.Builder.instance().setNameSuffix("rod").build());
             add(Ore.Item.Builder.instance().setNameSuffix("wire").build());
             add(Ore.Item.Builder.instance().setNameSuffix("ore")
-                    .setRegistrationType(Ore.Item.RegistrationType.BlockItem).build());
+                    .setRegistrationType(Ore.Item.RegistrationType.BlockItem)
+                    .setGenerateInWorld(true)
+                    .setBottomOffset(3)
+                    .setTopOffset(3)
+                    .setMaximum(225)
+                    .setMaxVeinSize(16)
+                    .setMaxPerChunk(64)
+                    .build());
            }};
         items.forEach(item -> {
             JsonUtils.serializeToJson(item, Ore.Item.CODEC).ifPresent(jsonElement->

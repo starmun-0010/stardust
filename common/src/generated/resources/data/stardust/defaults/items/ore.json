@@ -1,4 +1,10 @@
 {
-  "idSuffix": "ore",
-  "generationType": "BlockItem"
+  "maxPerChunk": 64,
+  "generationType": "BlockItem",
+  "maximum": 225,
+  "maxVeinSize": 16,
+  "generateInWorld": true,
+  "bottomOffset": 3,
+  "topOffset": 3,
+  "idSuffix": "ore"
 }

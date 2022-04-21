@@ -2,9 +2,10 @@
   "id": "aluminum",
   "items": [
     {
+      "generationType": "BlockItem",
+      "generateInWorld": true,
       "idSuffix": "ore",
-      "dropSelf": true,
-      "generationType": "BlockItem"
+      "dropSelf": true
     },
     {
       "idSuffix": "gear"

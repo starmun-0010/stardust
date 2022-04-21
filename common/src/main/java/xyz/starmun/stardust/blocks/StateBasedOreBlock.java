@@ -2,7 +2,6 @@ package xyz.starmun.stardust.blocks;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,6 +18,12 @@ import java.util.stream.Collectors;
 
 public class StateBasedOreBlock extends OreBlock {
     public boolean dropSelf = false;
+    public int bottomOffset;
+    public int topOffset;
+    public int maximum;
+    public int maxVeinSize;
+    public int maxPerChunk;
+
     public static class StringProperty extends Property<String>{
         protected final ImmutableMap<String,String> values;
         public StringProperty(String name) {

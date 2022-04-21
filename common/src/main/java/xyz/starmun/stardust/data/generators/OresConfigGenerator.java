@@ -27,6 +27,7 @@ public class OresConfigGenerator implements DataProvider {
                             .build())
                     .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("ore")
+                            .setGenerateInWorld(true)
                             .setDropSelf(true)
                             .setRegistrationType(Ore.Item.RegistrationType.BlockItem)
                             .build())

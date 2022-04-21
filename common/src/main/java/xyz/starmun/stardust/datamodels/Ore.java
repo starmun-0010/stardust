@@ -1,5 +1,6 @@
 package xyz.starmun.stardust.datamodels;
 
+import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -74,28 +75,80 @@ public class Ore {
         }
     }
     public static class Item {
-        private final String idSuffix;
-        private final List<String> colors;
-        private Boolean dropSelf;
-        private final RegistrationType registrationType;
+        protected final String idSuffix;
+        protected final List<String> colors;
+        protected Boolean dropSelf;
+        protected final RegistrationType registrationType;
+        protected Boolean generateInWorld;
+        protected Integer bottomOffset;
+        protected Integer topOffset;
+        protected Integer maximum;
+        protected Integer maxVeinSize;
+        protected Integer maxPerChunk;
         public static final Codec<Item> CODEC = RecordCodecBuilder.create((instance)->
                 instance.group(
-                        Codec.STRING.fieldOf("idSuffix").forGetter((Item item)-> item.idSuffix),
-                        Codec.BOOL.optionalFieldOf("dropSelf").forGetter((Item item)-> Optional.ofNullable(item.dropSelf)),
-                        Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Item item)-> Optional.ofNullable(item.colors)),
+                        Codec.STRING.fieldOf("idSuffix").forGetter((item)-> item.idSuffix),
+                        Codec.BOOL.optionalFieldOf("dropSelf").forGetter((item)-> Optional.ofNullable(item.dropSelf)),
+                        Codec.BOOL.optionalFieldOf("generateInWorld")
+                                .forGetter(( block) -> Optional.ofNullable(block.generateInWorld)),
+                        Codec.INT.optionalFieldOf("bottomOffset")
+                                .forGetter(( block)->Optional.ofNullable(block.bottomOffset)),
+                        Codec.INT.optionalFieldOf("topOffset")
+                                .forGetter(( block)->Optional.ofNullable(block.topOffset)),
+                        Codec.INT.optionalFieldOf("maximum")
+                                .forGetter(( block)->Optional.ofNullable(block.maximum)),
+                        Codec.INT.optionalFieldOf("maxVeinSize")
+                                .forGetter(( block)->Optional.ofNullable(block.maxVeinSize)),
+                        Codec.INT.optionalFieldOf("maxPerChunk")
+                                .forGetter(( block)->Optional.ofNullable(block.maxPerChunk)),
                         Codec.STRING.xmap(value-> EnumUtils.fromStringToEnum(RegistrationType.class,value),
                                 EnumUtils::fromEnumToString)
                                 .optionalFieldOf("generationType")
-                                .forGetter((Item item) -> (Optional.ofNullable(item.registrationType))))
-                        .apply(instance, (id,dropSelf,colors,registrationType)->
-                                new Item(id,dropSelf.orElse(false),colors.orElse(new ArrayList<>()),registrationType.orElse(RegistrationType.Item)))
+                                .forGetter(( item) -> (Optional.ofNullable(item.registrationType))),
+                        Codec.STRING.listOf().optionalFieldOf("colors").forGetter((item)-> Optional.ofNullable(item.colors)))
+                        .apply(instance, (id,
+                                          dropSelf,
+                                          generateInWorld,
+                                          bottomOffset,
+                                          topOffset,
+                                          maximum,
+                                          maxVeinSize,
+                                          maxPerChunk,
+                                          registrationType,
+                                          colors
+                                          )->
+                        new Item(id,
+                                dropSelf.orElse(false),
+                                generateInWorld.orElse(false),
+                                bottomOffset.orElse(null),
+                                topOffset.orElse(null),
+                                maximum.orElse(null),
+                                maxVeinSize.orElse(null),
+                                maxPerChunk.orElse(null),
+                                registrationType.orElse(RegistrationType.Item),
+                                colors.orElse(new ArrayList<>())))
 
         );
 
-        private Item(String idSuffix, Boolean dropSelf,List<String> colors, RegistrationType registrationType){
+        private Item(String idSuffix,
+                     Boolean dropSelf,
+                     Boolean generateInWorld,
+                     Integer bottomOffset,
+                     Integer topOffset,
+                     Integer maximum,
+                     Integer maxVeinSize,
+                     Integer maxPerChunk,
+                     RegistrationType registrationType,
+                     List<String> colors){
             this.idSuffix = idSuffix;
             this.registrationType = registrationType;
             this.dropSelf = dropSelf;
+            this.generateInWorld=generateInWorld;
+            this.bottomOffset=bottomOffset;
+            this.topOffset=topOffset;
+            this.maximum=maximum;
+            this.maxVeinSize=maxVeinSize;
+            this.maxPerChunk=maxPerChunk;
             this.colors = colors;
         }
 
@@ -114,12 +167,43 @@ public class Ore {
             return registrationType;
         }
 
+        public Boolean getGenerateInWorld() {
+            return generateInWorld;
+        }
+
+        public Integer getBottomOffset() {
+            return bottomOffset;
+        }
+
+        public Integer getTopOffset() {
+            return topOffset;
+        }
+
+        public Integer getMaximum() {
+            return maximum;
+        }
+
+        public Integer getMaxVeinSize() {
+            return maxVeinSize;
+        }
+
+        public Integer getMaxPerChunk() {
+            return maxPerChunk;
+        }
+
 
         public static class Builder{
-            private String nameSuffix;
-            private List<String> colors;
-            private RegistrationType registrationType;
-            private Boolean dropSelf;
+            protected String nameSuffix;
+            protected List<String> colors;
+            protected RegistrationType registrationType;
+            protected Boolean dropSelf;
+            protected Boolean generateInWorld;
+            protected Integer bottomOffset;
+            protected Integer topOffset;
+            protected Integer maximum;
+            protected Integer maxVeinSize;
+            protected Integer maxPerChunk;
+
             public static Builder instance(){return new Builder();};
 
             public Builder setNameSuffix(String nameSuffix){
@@ -138,10 +222,48 @@ public class Ore {
                 this.dropSelf = dropSelf;
                 return this;
             }
+            public Builder setGenerateInWorld(Boolean generateInWorld){
+                this.generateInWorld =  generateInWorld;
+                return this;
+            }
+            public Builder setBottomOffset(Integer bottomOffset) {
+                this.bottomOffset = bottomOffset;
+                return this;
+            }
+
+            public Builder setTopOffset(Integer topOffset) {
+                this.topOffset = topOffset;
+                return this;
+            }
+
+            public Builder setMaximum(Integer maximum) {
+                this.maximum = maximum;
+                return this;
+            }
+
+            public Builder setMaxVeinSize(Integer maxVeinSize) {
+                this.maxVeinSize = maxVeinSize;
+                return this;
+            }
+
+            public Builder setMaxPerChunk(Integer maxPerChunk) {
+                this.maxPerChunk = maxPerChunk;
+                return this;
+            }
 
             public Item build(){
-                return new Item(this.nameSuffix,this.dropSelf, this.colors, this.registrationType);
+                return new Item(this.nameSuffix,
+                        this.dropSelf,
+                        this.generateInWorld,
+                        this.bottomOffset,
+                        this.topOffset,
+                        this.maximum,
+                        this.maxVeinSize,
+                        this.maxPerChunk,
+                        this.registrationType,
+                        this.colors);
             }
+
 
         }
         public enum RegistrationType {

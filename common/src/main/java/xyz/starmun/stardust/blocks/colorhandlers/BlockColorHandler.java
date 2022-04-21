@@ -9,7 +9,8 @@ import org.jetbrains.annotations.Nullable;
 public class BlockColorHandler implements BlockColor {
     @Override
     public int getColor(BlockState blockState, @Nullable BlockAndTintGetter blockAndTintGetter, @Nullable BlockPos blockPos, int tintIndex) {
-       switch (tintIndex){
+
+        switch (tintIndex){
            case 0:
                return 0xe2c0aa;
            case 1:
