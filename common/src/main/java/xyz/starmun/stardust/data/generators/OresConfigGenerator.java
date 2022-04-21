@@ -35,6 +35,12 @@ public class OresConfigGenerator implements DataProvider {
                             .setMaximum(225)
                             .setMaxVeinSize(16)
                             .setMaxPerChunk(64)
+                            .setColors(new ArrayList<String>(){{
+                                add("0xff0000");
+                                add("0x00ff00");
+                                add("0x0000FF");
+                                add("0xFFffFF");
+                            }})
                             .build())
                     .build());
             add(Ore.Builder.instance()

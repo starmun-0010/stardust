@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootContext;
+import xyz.starmun.stardust.datamodels.Stratum;
 import xyz.starmun.stardust.registry.StrataRegistry;
 
 import java.util.Collection;
@@ -23,12 +24,13 @@ public class StateBasedOreBlock extends OreBlock {
     public int maximum;
     public int maxVeinSize;
     public int maxPerChunk;
+    public String[] colors;
 
     public static class StringProperty extends Property<String>{
         protected final ImmutableMap<String,String> values;
         public StringProperty(String name) {
             super(name, String.class);
-            this.values = ImmutableMap.copyOf(StrataRegistry.STRATA.stream().map(stratum -> stratum.getId()).collect(Collectors.toMap(Function.identity(), Function.identity())));
+            this.values = ImmutableMap.copyOf(StrataRegistry.STRATA.stream().map(Stratum::getId).collect(Collectors.toMap(Function.identity(), Function.identity())));
         }
 
         @Override

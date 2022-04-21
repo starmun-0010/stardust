@@ -51,6 +51,7 @@ public class OresRegistry {
                 REGISTERED_ORE_BLOCKS.put(ore.getId(), block);
                 if(dynamicItem.getRegistrationType()== Ore.Item.RegistrationType.BlockItem){
                     block.dropSelf = dynamicItem.getDropSelf();
+                    ColorsUtil.assignColors(ore,dynamicItem,block);
                     REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(ore.getId(), block));
                 }
            }
