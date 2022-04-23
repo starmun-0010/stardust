@@ -5,6 +5,23 @@
   ],
   "items": [
     {
+      "maxPerChunk": 64,
+      "generationType": "BlockItem",
+      "colors": [
+        "0xff0000",
+        "0x00ff00",
+        "0x0000FF",
+        "0xFFffFF"
+      ],
+      "maximum": 225,
+      "maxVeinSize": 16,
+      "generateInWorld": true,
+      "bottomOffset": 3,
+      "topOffset": 3,
+      "idSuffix": "ore",
+      "dropSelf": true
+    },
+    {
       "idSuffix": "gear"
     }
   ]

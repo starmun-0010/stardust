@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "stratum=minecraft_andesite": {
+      "model": "stardust:block/ore"
+    },
+    "stratum=minecraft_diorite": {
+      "model": "stardust:block/ore"
+    },
+    "stratum=minecraft_granite": {
+      "model": "stardust:block/ore"
+    },
+    "stratum=minecraft_gravel": {
+      "model": "stardust:block/ore"
+    },
+    "stratum=minecraft_netherrack": {
+      "model": "stardust:block/ore"
+    },
+    "stratum=minecraft_sand": {
+      "model": "stardust:block/ore"
+    },
+    "stratum=minecraft_sandstone": {
+      "model": "stardust:block/ore"
+    },
+    "stratum=minecraft_stone": {
+      "model": "stardust:block/ore"
+    }
+  }
+}

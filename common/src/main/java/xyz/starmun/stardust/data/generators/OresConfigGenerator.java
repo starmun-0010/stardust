@@ -51,6 +51,23 @@ public class OresConfigGenerator implements DataProvider {
                     .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
+                    .addItem(Ore.Item.Builder.instance()
+                            .setNameSuffix("ore")
+                            .setGenerateInWorld(true)
+                            .setDropSelf(true)
+                            .setRegistrationType(Ore.Item.RegistrationType.BlockItem)
+                            .setBottomOffset(3)
+                            .setTopOffset(3)
+                            .setMaximum(225)
+                            .setMaxVeinSize(16)
+                            .setMaxPerChunk(64)
+                            .setColors(new ArrayList<String>(){{
+                                add("0xff0000");
+                                add("0x00ff00");
+                                add("0x0000FF");
+                                add("0xFFffFF");
+                            }})
+                            .build())
                     .build());
             add(Ore.Builder.instance()
                     .setId("arcane")
@@ -59,6 +76,23 @@ public class OresConfigGenerator implements DataProvider {
                     }})
                     .addItem(Ore.Item.Builder.instance()
                             .setNameSuffix("gear")
+                            .build())
+                    .addItem(Ore.Item.Builder.instance()
+                            .setNameSuffix("ore")
+                            .setGenerateInWorld(true)
+                            .setDropSelf(true)
+                            .setRegistrationType(Ore.Item.RegistrationType.BlockItem)
+                            .setBottomOffset(3)
+                            .setTopOffset(3)
+                            .setMaximum(225)
+                            .setMaxVeinSize(16)
+                            .setMaxPerChunk(64)
+                            .setColors(new ArrayList<String>(){{
+                                add("0xff0000");
+                                add("0x00ff00");
+                                add("0x0000FF");
+                                add("0xFFffFF");
+                            }})
                             .build())
                     .build());
             add(Ore.Builder.instance()
