@@ -9,7 +9,7 @@ version = "${version}"
 displayName = "Stardust"
 authors = "starmun"
 description = '''
-Data driven ores
+Data driven materials
 '''
 #logoFile = ""
 

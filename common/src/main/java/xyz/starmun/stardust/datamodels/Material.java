@@ -1,6 +1,5 @@
 package xyz.starmun.stardust.datamodels;
 
-import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -10,20 +9,20 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Ore {
+public class Material {
     private final String id;
     private final List<String> colors;
     private final Map<String, Item> items;
 
-    public static final Codec<Ore> CODEC = RecordCodecBuilder.create((instance)->
+    public static final Codec<Material> CODEC = RecordCodecBuilder.create((instance)->
             instance.group(
-                    Codec.STRING.fieldOf("id").forGetter((Ore ore)-> ore.id),
-                    Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Ore ore)-> Optional.ofNullable(ore.colors)),
+                    Codec.STRING.fieldOf("id").forGetter((Material material)-> material.id),
+                    Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Material material)-> Optional.ofNullable(material.colors)),
                     Item.CODEC.listOf().fieldOf("items")
-                            .flatXmap(Ore::fromListToMap, Ore::fromMapToList)
-                            .forGetter((Ore ore) -> ore.items))
+                            .flatXmap(Material::fromListToMap, Material::fromMapToList)
+                            .forGetter((Material material) -> material.items))
                     .apply(instance, (id, colors,items)->
-                            new Ore(id, colors.orElse(new ArrayList<>()), items))
+                            new Material(id, colors.orElse(new ArrayList<>()), items))
     );
 
     private static  DataResult<List<Item>> fromMapToList(Map<String, Item>  items) {
@@ -34,7 +33,7 @@ public class Ore {
         return DataResult.success(items.stream().collect(Collectors.toMap(item->item.idSuffix, Function.identity())));
     }
 
-    private Ore(String id, List<String> colors, Map<String, Item> items){
+    private Material(String id, List<String> colors, Map<String, Item> items){
         this.id = id;
         this.colors = colors;
         this.items = items;
@@ -70,8 +69,8 @@ public class Ore {
             return this;
         }
 
-        public Ore build(){
-            return new Ore(this.id, this.colors, this.itemModels);
+        public Material build(){
+            return new Material(this.id, this.colors, this.itemModels);
         }
     }
     public static class Item {

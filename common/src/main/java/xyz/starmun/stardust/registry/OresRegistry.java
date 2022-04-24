@@ -3,7 +3,7 @@ package xyz.starmun.stardust.registry;
 import org.apache.commons.lang3.tuple.Pair;
 import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.blocks.StrataBasedStateBlock;
-import xyz.starmun.stardust.datamodels.Ore;
+import xyz.starmun.stardust.datamodels.Material;
 import xyz.starmun.stardust.datamodels.Properties;
 import xyz.starmun.stardust.item.StardustItem;
 import xyz.starmun.stardust.platform.contracts.BlockRegistryExpectPlatform;
@@ -37,28 +37,28 @@ public class OresRegistry {
                         Stardust.LOGGER.error("Could not load ore configuration file for "+file.toString());
                         return;
                     }
-                    registerDynamicOreItems(JsonUtils.parseJson(pair.getRight(), Ore.CODEC));
+                    registerDynamicOreItems(JsonUtils.parseJson(pair.getRight(), Material.CODEC));
                 });
         LOGGER.info("Loaded Custom Ores!");
         return REGISTERED_ORE_BLOCKS;
     }
 
-    private static void registerDynamicOreItems(Ore ore) {
-            ore.getItems().forEach((s, dynamicItem) ->{
-            if(dynamicItem.getRegistrationType() != Ore.Item.RegistrationType.Item){
-                Properties properties = PropertiesUtil.assignProperties(ore, dynamicItem);
+    private static void registerDynamicOreItems(Material material) {
+            material.getItems().forEach((s, dynamicItem) ->{
+            if(dynamicItem.getRegistrationType() != Material.Item.RegistrationType.Item){
+                Properties properties = PropertiesUtil.assignProperties(material, dynamicItem);
                 StrataBasedStateBlock block = (StrataBasedStateBlock) BlockRegistryExpectPlatform.register(properties);
-                REGISTERED_ORE_BLOCKS.put(ore.getId(), block);
-                if(dynamicItem.getRegistrationType()== Ore.Item.RegistrationType.BlockItem){
+                REGISTERED_ORE_BLOCKS.put(material.getId(), block);
+                if(dynamicItem.getRegistrationType()== Material.Item.RegistrationType.BlockItem){
                     block.dropSelf = dynamicItem.getDropSelf();
-                    ColorsUtil.assignColors(ore,dynamicItem,block);
-                    REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(ore.getId(), block));
+                    ColorsUtil.assignColors(material,dynamicItem,block);
+                    REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(material.getId(), block));
                 }
            }
            else {
-                StardustItem item = ItemRegistryExpectPlatform.register(ore.getId()+"_"+dynamicItem.getIdSuffix());
-                ColorsUtil.assignColors(ore, dynamicItem, item);
-                REGISTERED_DYNAMIC_ITEMS.put(ore.getId()+"_"+dynamicItem.getIdSuffix(), item);
+                StardustItem item = ItemRegistryExpectPlatform.register(material.getId()+"_"+dynamicItem.getIdSuffix());
+                ColorsUtil.assignColors(material, dynamicItem, item);
+                REGISTERED_DYNAMIC_ITEMS.put(material.getId()+"_"+dynamicItem.getIdSuffix(), item);
                 ModelRegistryExpectPlatform.register(Stardust.MOD_ID+":"+"item/"+dynamicItem.getIdSuffix());
             }
         });
