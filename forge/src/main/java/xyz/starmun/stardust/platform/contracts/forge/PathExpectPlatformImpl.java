@@ -21,7 +21,7 @@ public class PathExpectPlatformImpl {
 
     public static Path getOresConfigPath() throws IOException {
         try {
-            return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID).resolve(Constants.ORES_DIRECTORY));
+            return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID).resolve(Constants.MATERIALS_DIRECTORY));
         } catch (IOException exception) {
             Stardust.LOGGER.error("Error occurred trying to create config directory.");
             throw new IOException();
@@ -43,7 +43,7 @@ public class PathExpectPlatformImpl {
 
     public static Path getDynamicItemsConfigPath() throws IOException {
         try {
-            return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID).resolve(Constants.DYNAMIC_ITEMS_DIRECTORY));
+            return Files.createDirectories(FMLPaths.CONFIGDIR.get().resolve(Stardust.MOD_ID).resolve(Constants.DYNAMIC_VARIANTS_DIRECTORY));
         } catch (IOException exception) {
             Stardust.LOGGER.error("Error occurred trying to create config directory.");
             throw new IOException();

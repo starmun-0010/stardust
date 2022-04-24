@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
-public class ItemsRegistry {
+public class MaterialVariantsRegistry {
     public static HashMap<String, Material.Variant> REGISTERED_ITEM_MODEL = new HashMap<>();
     public static HashMap<String, Material.Variant> register(){
         LOGGER.info("Loading dynamic item models...");

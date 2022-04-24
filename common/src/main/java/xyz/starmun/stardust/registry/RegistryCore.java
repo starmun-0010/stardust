@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class RegistryCore {
     public static void registerAll(){
         StrataRegistry.register();
-        ItemsRegistry.register();
-        HashMap<String, StrataBasedStateBlock> blocksMap = OresRegistry.register();
+        MaterialVariantsRegistry.register();
+        HashMap<String, StrataBasedStateBlock> blocksMap = MaterialsRegistry.register();
         OreGenFeatureRegistry.register(blocksMap);
     }
 }

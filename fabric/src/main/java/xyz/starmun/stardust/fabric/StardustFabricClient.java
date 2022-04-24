@@ -6,22 +6,22 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.renderer.RenderType;
 import xyz.starmun.stardust.blocks.colorhandlers.BlockColorHandler;
 import xyz.starmun.stardust.item.ItemColorHandler;
-import xyz.starmun.stardust.registry.OresRegistry;
+import xyz.starmun.stardust.registry.MaterialsRegistry;
 
 public class StardustFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        OresRegistry.REGISTERED_ORE_BLOCKS.forEach((oreName, block) -> {
+        MaterialsRegistry.REGISTERED_ORE_BLOCKS.forEach((oreName, block) -> {
             ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) ->
                     new BlockColorHandler().getColor(state,view,pos,tintIndex), block);
 
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
         });
-        OresRegistry.REGISTERED_ORE_ITEMS.forEach(item->
+        MaterialsRegistry.REGISTERED_ORE_ITEMS.forEach(item->
             ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
                new ItemColorHandler().getColor(stack,tintIndex)
             , item));
-        OresRegistry.REGISTERED_DYNAMIC_ITEMS.forEach((key, value)->
+        MaterialsRegistry.REGISTERED_DYNAMIC_ITEMS.forEach((key, value)->
             ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
                new ItemColorHandler().getColor(stack,tintIndex)
             , value));

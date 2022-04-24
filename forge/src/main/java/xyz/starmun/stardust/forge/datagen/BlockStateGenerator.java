@@ -5,7 +5,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import xyz.starmun.stardust.blocks.StrataBasedStateBlock;
-import xyz.starmun.stardust.registry.OresRegistry;
+import xyz.starmun.stardust.registry.MaterialsRegistry;
 import xyz.starmun.stardust.registry.StrataRegistry;
 
 public class BlockStateGenerator extends BlockStateProvider {
@@ -17,7 +17,7 @@ public class BlockStateGenerator extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        OresRegistry.REGISTERED_ORE_BLOCKS.forEach((id, block)->{
+        MaterialsRegistry.REGISTERED_ORE_BLOCKS.forEach((id, block)->{
             StrataRegistry.STRATA.forEach(strata->{
                 RegisterStates(block, strata.getId(), new ModelFile.UncheckedModelFile(modLoc("block/ore")));
             });

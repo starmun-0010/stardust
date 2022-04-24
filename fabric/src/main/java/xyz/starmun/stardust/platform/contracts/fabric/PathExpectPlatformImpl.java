@@ -1,7 +1,6 @@
 package xyz.starmun.stardust.platform.contracts.fabric;
 
 import net.fabricmc.loader.api.FabricLoader;
-import sun.jvm.hotspot.utilities.AssertionFailure;
 import xyz.starmun.stardust.Stardust;
 import xyz.starmun.stardust.constants.Constants;
 
@@ -21,7 +20,7 @@ public class PathExpectPlatformImpl {
     }
     public static Path getOresConfigPath() throws IOException {
         try {
-           return Files.createDirectories(FabricLoader.getInstance().getConfigDir().resolve(Stardust.MOD_ID).resolve(Constants.ORES_DIRECTORY));
+           return Files.createDirectories(FabricLoader.getInstance().getConfigDir().resolve(Stardust.MOD_ID).resolve(Constants.MATERIALS_DIRECTORY));
         }
         catch (IOException exception){
             Stardust.LOGGER.error("Error occurred trying to create config directory.");
@@ -44,7 +43,7 @@ public class PathExpectPlatformImpl {
     }
     public static Path getDynamicItemsConfigPath() throws IOException {
         try {
-            return Files.createDirectories(FabricLoader.getInstance().getConfigDir().resolve(Stardust.MOD_ID).resolve(Constants.DYNAMIC_ITEMS_DIRECTORY));
+            return Files.createDirectories(FabricLoader.getInstance().getConfigDir().resolve(Stardust.MOD_ID).resolve(Constants.DYNAMIC_VARIANTS_DIRECTORY));
         }
         catch (IOException exception){
             Stardust.LOGGER.error("Error occurred trying to create config directory.");

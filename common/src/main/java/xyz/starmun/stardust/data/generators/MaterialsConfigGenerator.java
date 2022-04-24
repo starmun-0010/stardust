@@ -22,6 +22,7 @@ public class MaterialsConfigGenerator implements DataProvider {
         List<Material> materials = new ArrayList<Material>(){{
             add(Material.Builder.instance()
                     .setId("aluminum")
+                    .setIsEnabled(false)
                     .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())

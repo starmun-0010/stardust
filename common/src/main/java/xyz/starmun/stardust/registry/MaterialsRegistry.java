@@ -24,7 +24,7 @@ import java.util.Set;
 
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
-public class OresRegistry {
+public class MaterialsRegistry {
     public static final HashMap<String, StrataBasedStateBlock> REGISTERED_ORE_BLOCKS = new HashMap<>();
     public static final Set<net.minecraft.world.item.Item> REGISTERED_ORE_ITEMS = new HashSet<>();
     public static final Map<String, StardustItem> REGISTERED_DYNAMIC_ITEMS = new HashMap<>();
@@ -44,6 +44,10 @@ public class OresRegistry {
     }
 
     private static void registerDynamicOreItems(Material material) {
+            if(!material.getIsEnabled())
+            {
+                return;
+            }
             material.getItems().forEach((s, dynamicItem) ->{
             if(dynamicItem.getRegistrationType() != Material.Variant.RegistrationType.Item){
                 Properties properties = PropertiesUtil.assignProperties(material, dynamicItem);
@@ -63,8 +67,4 @@ public class OresRegistry {
             }
         });
     }
-
-
-
-
 }

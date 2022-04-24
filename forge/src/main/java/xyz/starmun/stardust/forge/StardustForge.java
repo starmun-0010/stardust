@@ -29,7 +29,7 @@ import xyz.starmun.stardust.blocks.colorhandlers.BlockColorHandler;
 import xyz.starmun.stardust.datamodels.Stratum;
 import xyz.starmun.stardust.forge.datagen.StratumBasedOreBlockModel;
 import xyz.starmun.stardust.item.ItemColorHandler;
-import xyz.starmun.stardust.registry.OresRegistry;
+import xyz.starmun.stardust.registry.MaterialsRegistry;
 import xyz.starmun.stardust.registry.StrataRegistry;
 
 @Mod(Stardust.MOD_ID)
@@ -55,7 +55,7 @@ public class StardustForge {
     @SubscribeEvent
     public static void onModelBakeEvent(ModelBakeEvent event){
 
-        OresRegistry.REGISTERED_ORE_BLOCKS.forEach((id, block)->{
+        MaterialsRegistry.REGISTERED_ORE_BLOCKS.forEach((id, block)->{
             for (Stratum stratum : StrataRegistry.STRATA) {
                 StratumBasedOreBlockModel customModel = new StratumBasedOreBlockModel(stratum);
                 event.getModelRegistry()
@@ -64,7 +64,7 @@ public class StardustForge {
             }
         });
 
-        OresRegistry.REGISTERED_DYNAMIC_ITEMS.forEach((id, item)->{
+        MaterialsRegistry.REGISTERED_DYNAMIC_ITEMS.forEach((id, item)->{
             event.getModelRegistry()
                .put(new ModelResourceLocation(Stardust.MOD_ID+":"+id,"inventory"),
                    ModelLoader.instance().bake(new ResourceLocation("stardust:item/"+id.substring(id.lastIndexOf("_")+1)), SimpleModelTransform.IDENTITY));
@@ -75,18 +75,18 @@ public class StardustForge {
         event.getMinecraftSupplier().get().tell(() -> {
             Minecraft.getInstance().getBlockColors()
                     .register(new BlockColorHandler(),
-                            OresRegistry.REGISTERED_ORE_BLOCKS.values()
+                            MaterialsRegistry.REGISTERED_ORE_BLOCKS.values()
                                     .toArray(new Block[0]));
             Minecraft.getInstance().getItemColors()
                     .register( new ItemColorHandler(),
-                            OresRegistry.REGISTERED_ORE_ITEMS
+                            MaterialsRegistry.REGISTERED_ORE_ITEMS
                                     .toArray(new Item[0]));
             Minecraft.getInstance().getItemColors()
                     .register( new ItemColorHandler(),
-                            OresRegistry.REGISTERED_DYNAMIC_ITEMS.values()
+                            MaterialsRegistry.REGISTERED_DYNAMIC_ITEMS.values()
                                     .toArray(new Item[0]));
         });
-        for (Block block : OresRegistry.REGISTERED_ORE_BLOCKS.values()) {
+        for (Block block : MaterialsRegistry.REGISTERED_ORE_BLOCKS.values()) {
             ItemBlockRenderTypes.setRenderLayer(block,
                     layer -> layer == RenderType.cutout());
         }

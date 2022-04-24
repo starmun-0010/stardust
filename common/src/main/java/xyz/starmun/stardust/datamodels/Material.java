@@ -11,18 +11,20 @@ import java.util.stream.Collectors;
 
 public class Material {
     private final String id;
+    protected Boolean isEnabled;
     private final List<String> colors;
     private final Map<String, Variant> items;
 
     public static final Codec<Material> CODEC = RecordCodecBuilder.create((instance)->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter((Material material)-> material.id),
+                    Codec.BOOL.optionalFieldOf("isEnabled").forGetter((material)-> Optional.ofNullable(material.isEnabled)),
                     Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Material material)-> Optional.ofNullable(material.colors)),
                     Variant.CODEC.listOf().fieldOf("items")
                             .flatXmap(Material::fromListToMap, Material::fromMapToList)
                             .forGetter((Material material) -> material.items))
-                    .apply(instance, (id, colors,items)->
-                            new Material(id, colors.orElse(new ArrayList<>()), items))
+                    .apply(instance, (id,isEnabled, colors,items)->
+                            new Material(id,isEnabled.orElse(true), colors.orElse(new ArrayList<>()), items))
     );
 
     private static  DataResult<List<Variant>> fromMapToList(Map<String, Variant>  items) {
@@ -33,8 +35,9 @@ public class Material {
         return DataResult.success(variants.stream().collect(Collectors.toMap(item->item.idSuffix, Function.identity())));
     }
 
-    private Material(String id, List<String> colors, Map<String, Variant> items){
+    private Material(String id, Boolean isEnabled, List<String> colors, Map<String, Variant> items){
         this.id = id;
+        this.isEnabled = isEnabled;
         this.colors = colors;
         this.items = items;
     }
@@ -46,18 +49,27 @@ public class Material {
         return items;
     }
 
+    public Boolean getIsEnabled() {
+        return isEnabled;
+    }
     public List<String> getColors() {
         return colors;
     }
 
     public static class Builder{
         private String id;
+        private Boolean isEnabled;
+
         private List<String> colors;
         private Map<String, Variant>  itemModels = new HashMap<>();
 
         public static Builder instance(){return new Builder();};
         public Builder setId(String id){
             this.id = id;
+            return this;
+        }
+        public Builder setIsEnabled(Boolean isEnabled){
+            this.isEnabled = isEnabled;
             return this;
         }
         public Builder setColors(List<String> colors){
@@ -70,7 +82,7 @@ public class Material {
         }
 
         public Material build(){
-            return new Material(this.id, this.colors, this.itemModels);
+            return new Material(this.id, this.isEnabled, this.colors, this.itemModels);
         }
     }
     public static class Variant {
