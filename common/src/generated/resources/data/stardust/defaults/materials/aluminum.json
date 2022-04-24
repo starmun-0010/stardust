@@ -1,5 +1,6 @@
 {
   "id": "aluminum",
+  "isEnabled": false,
   "items": [
     {
       "maxPerChunk": 64,
