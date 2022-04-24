@@ -24,7 +24,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.starmun.stardust.Stardust;
-import xyz.starmun.stardust.blocks.StateBasedOreBlock;
+import xyz.starmun.stardust.blocks.StrataBasedStateBlock;
 import xyz.starmun.stardust.blocks.colorhandlers.BlockColorHandler;
 import xyz.starmun.stardust.datamodels.Stratum;
 import xyz.starmun.stardust.forge.datagen.StratumBasedOreBlockModel;
@@ -60,7 +60,7 @@ public class StardustForge {
                 StratumBasedOreBlockModel customModel = new StratumBasedOreBlockModel(stratum);
                 event.getModelRegistry()
                     .put(BlockModelShaper.stateToModelLocation(block.getStateDefinition()
-                        .any().setValue(StateBasedOreBlock.STRATUM, stratum.getId())),customModel);
+                        .any().setValue(StrataBasedStateBlock.STRATUM, stratum.getId())),customModel);
             }
         });
 

@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class StateBasedOreBlock extends OreBlock {
+public class StrataBasedStateBlock extends OreBlock {
     public boolean dropSelf = false;
     public int bottomOffset;
     public int topOffset;
@@ -66,7 +66,7 @@ public class StateBasedOreBlock extends OreBlock {
 
     }
     public static StringProperty STRATUM = StringProperty.create("stratum");
-    public StateBasedOreBlock(Properties properties) {
+    public StrataBasedStateBlock(Properties properties) {
         super(properties);
         if(StrataRegistry.STRATA.size()>1){
             registerDefaultState(

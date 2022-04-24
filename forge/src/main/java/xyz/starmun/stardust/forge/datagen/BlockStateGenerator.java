@@ -4,7 +4,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import xyz.starmun.stardust.blocks.StateBasedOreBlock;
+import xyz.starmun.stardust.blocks.StrataBasedStateBlock;
 import xyz.starmun.stardust.registry.OresRegistry;
 import xyz.starmun.stardust.registry.StrataRegistry;
 
@@ -23,9 +23,9 @@ public class BlockStateGenerator extends BlockStateProvider {
             });
         });
     }
-    public void RegisterStates(StateBasedOreBlock block, String stratumId, ModelFile modelFile) {
+    public void RegisterStates(StrataBasedStateBlock block, String stratumId, ModelFile modelFile) {
             getVariantBuilder(block)
-                    .partialState().with(StateBasedOreBlock.STRATUM, stratumId)
+                    .partialState().with(StrataBasedStateBlock.STRATUM, stratumId)
                     .modelForState().modelFile(modelFile).addModel();
     }
 }

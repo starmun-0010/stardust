@@ -1,14 +1,14 @@
 package xyz.starmun.stardust.registry;
 
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import xyz.starmun.stardust.blocks.StateBasedOreBlock;
+import xyz.starmun.stardust.blocks.StrataBasedStateBlock;
 import xyz.starmun.stardust.platform.contracts.BiomeModificationExpectPlatform;
 import xyz.starmun.stardust.worldgen.StardustOreConfiguration;
 
 import java.util.HashMap;
 
 public class OreGenFeatureRegistry {
-    public static void register(HashMap<String, StateBasedOreBlock> blocks){
+    public static void register(HashMap<String, StrataBasedStateBlock> blocks){
 
             StrataRegistry.STRATA.forEach(stratum -> blocks.forEach((oreName, block)->{
             ConfiguredFeature<?, ?> configuredFeature = StardustOreConfiguration
