@@ -13,19 +13,19 @@ import java.util.HashMap;
 import static xyz.starmun.stardust.Stardust.LOGGER;
 
 public class ItemsRegistry {
-    public static HashMap<String, Material.Item> REGISTERED_ITEM_MODEL = new HashMap<>();
-    public static HashMap<String, Material.Item> register(){
+    public static HashMap<String, Material.Variant> REGISTERED_ITEM_MODEL = new HashMap<>();
+    public static HashMap<String, Material.Variant> register(){
         LOGGER.info("Loading dynamic item models...");
         FilesUtils.crawlJsonFiles(PathExpectPlatform.getDynamicItemsConfigPath())
                 .forEach((file)->{
                     Pair<File, Reader> pair = FilesUtils.loadFile(file);
-                    registerItemModel(JsonUtils.parseJson(pair.getRight(), Material.Item.CODEC));
+                    registerItemModel(JsonUtils.parseJson(pair.getRight(), Material.Variant.CODEC));
                 });
         LOGGER.info("Loaded dynamic item models!");
         return REGISTERED_ITEM_MODEL;
     }
 
-    private static void registerItemModel(Material.Item dynamicItemModel) {
-        REGISTERED_ITEM_MODEL.put(dynamicItemModel.getIdSuffix(),  dynamicItemModel);
+    private static void registerItemModel(Material.Variant dynamicVariantModel) {
+        REGISTERED_ITEM_MODEL.put(dynamicVariantModel.getIdSuffix(), dynamicVariantModel);
     }
 }

@@ -10,7 +10,7 @@ import xyz.starmun.stardust.utils.JsonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OresConfigGenerator implements DataProvider {
+public class MaterialsConfigGenerator implements DataProvider {
 
     @Override
     public String getName() {
@@ -22,14 +22,14 @@ public class OresConfigGenerator implements DataProvider {
         List<Material> materials = new ArrayList<Material>(){{
             add(Material.Builder.instance()
                     .setId("aluminum")
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("ore")
                             .setGenerateInWorld(true)
                             .setDropSelf(true)
-                            .setRegistrationType(Material.Item.RegistrationType.BlockItem)
+                            .setRegistrationType(Material.Variant.RegistrationType.BlockItem)
                             .setBottomOffset(3)
                             .setTopOffset(3)
                             .setMaximum(225)
@@ -48,14 +48,14 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("ore")
                             .setGenerateInWorld(true)
                             .setDropSelf(true)
-                            .setRegistrationType(Material.Item.RegistrationType.BlockItem)
+                            .setRegistrationType(Material.Variant.RegistrationType.BlockItem)
                             .setBottomOffset(3)
                             .setTopOffset(3)
                             .setMaximum(225)
@@ -74,14 +74,14 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("ore")
                             .setGenerateInWorld(true)
                             .setDropSelf(true)
-                            .setRegistrationType(Material.Item.RegistrationType.BlockItem)
+                            .setRegistrationType(Material.Variant.RegistrationType.BlockItem)
                             .setBottomOffset(3)
                             .setTopOffset(3)
                             .setMaximum(225)
@@ -100,7 +100,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -109,7 +109,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -118,7 +118,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -127,7 +127,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -136,7 +136,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -145,7 +145,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -154,7 +154,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -163,7 +163,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -172,7 +172,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -181,7 +181,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -190,7 +190,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -199,7 +199,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -208,7 +208,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -217,7 +217,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -226,7 +226,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -235,7 +235,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -245,7 +245,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -255,7 +255,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -264,7 +264,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -274,7 +274,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -284,7 +284,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -294,7 +294,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -304,7 +304,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -314,7 +314,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -324,7 +324,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -334,7 +334,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -344,7 +344,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -354,7 +354,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -364,7 +364,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -374,7 +374,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -384,7 +384,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -394,7 +394,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -404,7 +404,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());
@@ -414,7 +414,7 @@ public class OresConfigGenerator implements DataProvider {
                     .setColors(new ArrayList<String>(){{
                         add("");
                     }})
-                    .addItem(Material.Item.Builder.instance()
+                    .addVariant(Material.Variant.Builder.instance()
                             .setNameSuffix("gear")
                             .build())
                     .build());

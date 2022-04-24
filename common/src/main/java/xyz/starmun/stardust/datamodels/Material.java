@@ -12,28 +12,28 @@ import java.util.stream.Collectors;
 public class Material {
     private final String id;
     private final List<String> colors;
-    private final Map<String, Item> items;
+    private final Map<String, Variant> items;
 
     public static final Codec<Material> CODEC = RecordCodecBuilder.create((instance)->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter((Material material)-> material.id),
                     Codec.STRING.listOf().optionalFieldOf("colors").forGetter((Material material)-> Optional.ofNullable(material.colors)),
-                    Item.CODEC.listOf().fieldOf("items")
+                    Variant.CODEC.listOf().fieldOf("items")
                             .flatXmap(Material::fromListToMap, Material::fromMapToList)
                             .forGetter((Material material) -> material.items))
                     .apply(instance, (id, colors,items)->
                             new Material(id, colors.orElse(new ArrayList<>()), items))
     );
 
-    private static  DataResult<List<Item>> fromMapToList(Map<String, Item>  items) {
+    private static  DataResult<List<Variant>> fromMapToList(Map<String, Variant>  items) {
         return DataResult.success(new ArrayList<>(items.values()));
     }
 
-    private static DataResult<Map<String, Item>> fromListToMap(List<Item> items) {
-        return DataResult.success(items.stream().collect(Collectors.toMap(item->item.idSuffix, Function.identity())));
+    private static DataResult<Map<String, Variant>> fromListToMap(List<Variant> variants) {
+        return DataResult.success(variants.stream().collect(Collectors.toMap(item->item.idSuffix, Function.identity())));
     }
 
-    private Material(String id, List<String> colors, Map<String, Item> items){
+    private Material(String id, List<String> colors, Map<String, Variant> items){
         this.id = id;
         this.colors = colors;
         this.items = items;
@@ -42,7 +42,7 @@ public class Material {
     public String getId() {
         return id;
     }
-    public  Map<String, Item>  getItems() {
+    public  Map<String, Variant>  getItems() {
         return items;
     }
 
@@ -53,7 +53,7 @@ public class Material {
     public static class Builder{
         private String id;
         private List<String> colors;
-        private Map<String, Item>  itemModels = new HashMap<>();
+        private Map<String, Variant>  itemModels = new HashMap<>();
 
         public static Builder instance(){return new Builder();};
         public Builder setId(String id){
@@ -64,8 +64,8 @@ public class Material {
             this.colors = colors;
             return this;
         }
-        public Builder addItem(Item item){
-            this.itemModels.put(item.idSuffix, item);
+        public Builder addVariant(Variant variant){
+            this.itemModels.put(variant.idSuffix, variant);
             return this;
         }
 
@@ -73,7 +73,7 @@ public class Material {
             return new Material(this.id, this.colors, this.itemModels);
         }
     }
-    public static class Item {
+    public static class Variant {
         protected final String idSuffix;
         protected final List<String> colors;
         protected Boolean dropSelf;
@@ -84,7 +84,7 @@ public class Material {
         protected Integer maximum;
         protected Integer maxVeinSize;
         protected Integer maxPerChunk;
-        public static final Codec<Item> CODEC = RecordCodecBuilder.create((instance)->
+        public static final Codec<Variant> CODEC = RecordCodecBuilder.create((instance)->
                 instance.group(
                         Codec.STRING.fieldOf("idSuffix").forGetter((item)-> item.idSuffix),
                         Codec.BOOL.optionalFieldOf("dropSelf").forGetter((item)-> Optional.ofNullable(item.dropSelf)),
@@ -116,7 +116,7 @@ public class Material {
                                           registrationType,
                                           colors
                                           )->
-                        new Item(id,
+                        new Variant(id,
                                 dropSelf.orElse(false),
                                 generateInWorld.orElse(false),
                                 bottomOffset.orElse(null),
@@ -129,16 +129,16 @@ public class Material {
 
         );
 
-        private Item(String idSuffix,
-                     Boolean dropSelf,
-                     Boolean generateInWorld,
-                     Integer bottomOffset,
-                     Integer topOffset,
-                     Integer maximum,
-                     Integer maxVeinSize,
-                     Integer maxPerChunk,
-                     RegistrationType registrationType,
-                     List<String> colors){
+        private Variant(String idSuffix,
+                        Boolean dropSelf,
+                        Boolean generateInWorld,
+                        Integer bottomOffset,
+                        Integer topOffset,
+                        Integer maximum,
+                        Integer maxVeinSize,
+                        Integer maxPerChunk,
+                        RegistrationType registrationType,
+                        List<String> colors){
             this.idSuffix = idSuffix;
             this.registrationType = registrationType;
             this.dropSelf = dropSelf;
@@ -250,8 +250,8 @@ public class Material {
                 return this;
             }
 
-            public Item build(){
-                return new Item(this.nameSuffix,
+            public Variant build(){
+                return new Variant(this.nameSuffix,
                         this.dropSelf,
                         this.generateInWorld,
                         this.bottomOffset,

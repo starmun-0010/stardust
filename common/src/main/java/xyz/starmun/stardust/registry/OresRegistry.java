@@ -45,11 +45,11 @@ public class OresRegistry {
 
     private static void registerDynamicOreItems(Material material) {
             material.getItems().forEach((s, dynamicItem) ->{
-            if(dynamicItem.getRegistrationType() != Material.Item.RegistrationType.Item){
+            if(dynamicItem.getRegistrationType() != Material.Variant.RegistrationType.Item){
                 Properties properties = PropertiesUtil.assignProperties(material, dynamicItem);
                 StrataBasedStateBlock block = (StrataBasedStateBlock) BlockRegistryExpectPlatform.register(properties);
                 REGISTERED_ORE_BLOCKS.put(material.getId(), block);
-                if(dynamicItem.getRegistrationType()== Material.Item.RegistrationType.BlockItem){
+                if(dynamicItem.getRegistrationType()== Material.Variant.RegistrationType.BlockItem){
                     block.dropSelf = dynamicItem.getDropSelf();
                     ColorsUtil.assignColors(material,dynamicItem,block);
                     REGISTERED_ORE_ITEMS.add(ItemRegistryExpectPlatform.register(material.getId(), block));

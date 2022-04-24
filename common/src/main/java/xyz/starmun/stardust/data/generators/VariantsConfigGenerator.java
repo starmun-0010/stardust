@@ -10,7 +10,7 @@ import xyz.starmun.stardust.utils.JsonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemsConfigGenerator implements DataProvider {
+public class VariantsConfigGenerator implements DataProvider {
 
     @Override
     public String getName() {
@@ -19,14 +19,14 @@ public class ItemsConfigGenerator implements DataProvider {
 
     @Override
     public void run(HashCache hashCache) {
-        List<Material.Item> items = new ArrayList<Material.Item>(){{
-            add(Material.Item.Builder.instance().setNameSuffix("gear").build());
-            add(Material.Item.Builder.instance().setNameSuffix("nugget").build());
-            add(Material.Item.Builder.instance().setNameSuffix("plate").build());
-            add(Material.Item.Builder.instance().setNameSuffix("rod").build());
-            add(Material.Item.Builder.instance().setNameSuffix("wire").build());
-            add(Material.Item.Builder.instance().setNameSuffix("ore")
-                    .setRegistrationType(Material.Item.RegistrationType.BlockItem)
+        List<Material.Variant> variants = new ArrayList<Material.Variant>(){{
+            add(Material.Variant.Builder.instance().setNameSuffix("gear").build());
+            add(Material.Variant.Builder.instance().setNameSuffix("nugget").build());
+            add(Material.Variant.Builder.instance().setNameSuffix("plate").build());
+            add(Material.Variant.Builder.instance().setNameSuffix("rod").build());
+            add(Material.Variant.Builder.instance().setNameSuffix("wire").build());
+            add(Material.Variant.Builder.instance().setNameSuffix("ore")
+                    .setRegistrationType(Material.Variant.RegistrationType.BlockItem)
                     .setGenerateInWorld(true)
                     .setBottomOffset(3)
                     .setTopOffset(3)
@@ -35,8 +35,8 @@ public class ItemsConfigGenerator implements DataProvider {
                     .setMaxPerChunk(64)
                     .build());
            }};
-        items.forEach(item -> {
-            JsonUtils.serializeToJson(item, Material.Item.CODEC).ifPresent(jsonElement->
+        variants.forEach(item -> {
+            JsonUtils.serializeToJson(item, Material.Variant.CODEC).ifPresent(jsonElement->
                     FilesUtils.saveJsonFile(StardustPaths.DataGen.DEFAULT_ITEMS_FILES_GENERATION_PATH
                             + item.getIdSuffix(), jsonElement, hashCache));
         });
